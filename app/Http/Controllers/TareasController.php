@@ -15,20 +15,16 @@ class TareasController extends Controller
         $this->Tareas=$Tareas;
     }
     
-    public function index(TareasModel $Tareas)
+    public function index()
     {
+          $respon = TareasModel::with('Usuario','Responsables','Participantes','Observadores','SubTareas')->where('tip_tar','=','T')->get();
+               return $respon;        
+    }
 
-          $respon = TareasModel::with('Responsables')->get();
+    public function TareasEstado($estado)
+    {
+          $respon = TareasModel::with('Usuario','Responsables','Participantes','Observadores','SubTareas')->where('tip_tar','=','T')->where('Estado_Tarea','=',$estado)->get();
           return $respon;
-
-        $usuarios=DB::table('tarea')
-        ->join('responsableusuario','responsableusuario.Id_Tarea','=','tarea.Id_Tarea')
-        ->join('usuarios','usuarios.Id_Usuario','=','responsableusuario.Id_Usuario')
-        ->select('tarea.Nombre as Nombre','usuarios.Nombre as User')
-        ->orderBy('tarea.Id_Tarea', 'asc')
-        ->get();
-        return Response()->json($usuarios);
-        // return $Tareas->get();
     }
 
     public function MisTareas()

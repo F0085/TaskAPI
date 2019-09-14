@@ -14,7 +14,7 @@ class ResponsablesModel extends Model
         'Id_Tarea', 'Id_Usuario'
     ];
 
-      public function Tarea()
+    public function Tarea()
     {
         return $this->belongsTo('App\TareaModel', 'Id_tarea', 'Id_Tarea');
     }

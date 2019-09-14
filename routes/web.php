@@ -13,6 +13,7 @@
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
+header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 // $router->get('/', function () use ($router) {
 //     return $router->app->version();
 // });
@@ -53,6 +54,7 @@ header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
 
 
 	route::resource('Tareas', 'TareasController');
+	route::get('TareasEstado/{estado}', 'TareasController@TareasEstado');
 	
 	route::resource('Responsables', 'ResponsablesController');
 	route::resource('Participantes', 'ParticipantesController');
