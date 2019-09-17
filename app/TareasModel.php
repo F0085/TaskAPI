@@ -11,7 +11,7 @@ class TareasModel extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'Id_Usuario', 'Estado_Tarea', 'Id_Tipo_Tarea', 'Nombre','FechaInicio','FechaFin','FechaCreacion','Descripcion','tareaFavorita','tareasIdTareas','Hora_Inicio','Hora_Fin'
+        'Id_Usuario', 'Estado_Tarea', 'Id_Tipo_Tarea', 'Nombre','FechaInicio','FechaFin','FechaCreacion','Descripcion','tareaFavorita','tareasIdTareas','Hora_Inicio','Hora_Fin','tip_tar'
     ];
 
 
@@ -41,6 +41,10 @@ class TareasModel extends Model
        public function SubTareas()
     {
         return $this->hasMany('App\TareasModel', 'tareasIdTareas','Id_tarea')->with('Responsables','Participantes','Observadores','Usuario','SubTareas');
+    }
+
+    public function TipoTareas(){
+        return $this->hasMany('App\TipoTareasModel','Id_Tipo_Tarea','Id_Tipo_Tarea');
     }
 
 

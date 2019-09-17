@@ -51,6 +51,10 @@ header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 	route::resource('UsuariosRoles', 'UsuariosRolesController');
 	// route::put('StoreUserRoles', 'RolesController@UsuarioRolesAtc');
 
+	//BANDEJA DE ENTRADA DE TAREAS PPOR USUARIO
+	route::get('MisTareasResponsables/{idUsuario}', 'TareasController@MisTareasResponsables');
+	route::get('MisTareasParticipantes/{idUsuario}', 'TareasController@MisTareasParticipantes');
+	route::get('MisTareasObservadores/{idUsuario}', 'TareasController@MisTareasObservadores');
 
 
 	route::resource('Tareas', 'TareasController');
@@ -60,6 +64,14 @@ header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 	route::resource('Participantes', 'ParticipantesController');
 	route::resource('Observadores', 'ObservadoresController');
 
+
+	route::resource('TipoTareas','TipoTareasController');
+
+	route::get('TipoTareasPerTra','TipoTareasController@TipoTareasPerTra');
+	
+	route::get('TareasPorTipo/{estado}/{tipo}','TareasController@TareasPorTipo');
+
+	
 
 	//EXTRAE LAS AREAS DE LAS RELACIONES DE AREASROLES
 	route::get('disntinArea', 'AreasRolesController@AreasRolesDistinct');

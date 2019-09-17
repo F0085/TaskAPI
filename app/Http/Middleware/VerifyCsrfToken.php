@@ -48,7 +48,10 @@ class VerifyCsrfToken extends Middleware
         'Participantes',
         'Participantes/*',
         'Observadores',
-        'Observadores/*'
+        'Observadores/*',
+        'TipoTareas',
+        'TipoTareas/*'
+        
         
     ];
 }

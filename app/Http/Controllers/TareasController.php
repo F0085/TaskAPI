@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\TareasModel;
+use App\ResponsablesModel;
+use App\ParticipantesModel;
+use App\ObservadoresModel;
 use DB;
 
 
@@ -23,19 +26,33 @@ class TareasController extends Controller
 
     public function TareasEstado($estado)
     {
-          $respon = TareasModel::with('Usuario','Responsables','Participantes','Observadores','SubTareas')->where('tip_tar','=','T')->where('Estado_Tarea','=',$estado)->get();
+          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas')->where('tip_tar','=','T')->where('Estado_Tarea','=',$estado)->get();
           return $respon;
     }
 
-    public function MisTareas()
+    public function TareasPorTipo($estado,$tipo)
     {
-        $usuarios=DB::table('tarea')
-        ->join('responsableusuario','responsableusuario.Id_Tarea','=','tareas.Id_Tarea')
-        ->join('usuarios','usuarios.Id_Usuario','=','responsableusuario.Id_Usuario')
-        ->select('tarea.Nombre as Nombre','usuarios.Nombre as User')
-        ->orderBy('tarea.Id_Tarea', 'asc')
-        ->get();
-        return Response()->json($usuarios);
+          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas')->where('tip_tar','=','T')->where('Estado_Tarea','=',$estado)->where('Id_Tipo_Tarea','=',$tipo)->get();
+          return $respon;
+    }
+
+    //TRAER TAREAS POR RESPONSABLES LOGUEADO
+    public function MisTareasResponsables($idUsuario)
+    {
+        $res=ResponsablesModel::with('Tarea','Usuario')->where('Id_Usuario','=',$idUsuario)->get();
+        return $res;
+    }
+    //TRAER TAREAS POR PARTICPANTE LOGUEADO
+    public function MisTareasParticipantes($idUsuario)
+    {
+        $res=ParticipantesModel::with('Tarea','Usuario')->where('Id_Usuario','=',$idUsuario)->get();
+        return $res;
+    }
+    //TRAER TAREAS POR OBSERVADOR LOGUEADO
+    public function MisTareasObservadores($idUsuario)
+    {
+        $res=ObservadoresModel::with('Tarea','Usuario')->where('Id_Usuario','=',$idUsuario)->get();
+        return $res;
     }
 
     /**
@@ -68,7 +85,8 @@ class TareasController extends Controller
      */
     public function show($id)
     {
-        //
+          $respon = TareasModel::with('Usuario','Responsables','Participantes','Observadores','SubTareas')->where('Id_Tarea','=',$id)->get();
+               return $respon;  
     }
 
     /**

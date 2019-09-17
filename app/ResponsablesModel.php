@@ -16,7 +16,7 @@ class ResponsablesModel extends Model
 
     public function Tarea()
     {
-        return $this->belongsTo('App\TareaModel', 'Id_tarea', 'Id_Tarea');
+        return $this->belongsTo('App\TareasModel', 'Id_Tarea', 'Id_tarea')->with('Observadores','Participantes','Usuario','Responsables');
     }
 
     public function Usuario()
