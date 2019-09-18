@@ -99,7 +99,7 @@ class UsuariosController extends Controller
                  'roles.Descripcion as Rol',
                  'roles.Id_Roles as Id_Roles',
                  'area.Descripcion as Area',
-                 'area.Id_Area as Id_Area',)
+                 'area.Id_Area as Id_Area')
                  // 'area.Descripcion as Area',
                  // 'area.Id_Area as Id_Area')
         ->first();
