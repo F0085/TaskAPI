@@ -56,6 +56,11 @@ header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 	route::get('MisTareasParticipantes/{idUsuario}', 'TareasController@MisTareasParticipantes');
 	route::get('MisTareasObservadores/{idUsuario}', 'TareasController@MisTareasObservadores');
 
+	//SUBA AREAS
+	route::resource('SubArea', 'SubAreaController');
+	route::get('AreaSubArea', 'SubAreaController@AreaSubArea');
+	route::get('SubAreaPorArea/{area}', 'AreasRolesController@SubAreaPorArea');
+	
 
 	route::resource('Tareas', 'TareasController');
 	route::get('TareasEstado/{estado}', 'TareasController@TareasEstado');

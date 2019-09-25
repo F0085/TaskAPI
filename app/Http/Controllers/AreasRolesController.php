@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\AreasRolesModel;
 use App\AreaModel;
+use App\SubAreaModel;
 use DB;
+
 class AreasRolesController extends Controller
 {
     /**
@@ -28,43 +30,15 @@ class AreasRolesController extends Controller
 
     //LISTA LAS AREAS ROLES 
     public function AreasRoles(){
-          $recinto = AreaModel::with('SubArea')->get();
-          // dd($recinto);
-          return $recinto;
-       // $AreaRoles = AreasRolesModel::with('Area','Roles')->get();
-        // $AreaRoles=DB::table('area_roles')
-        // // ->join('area','area.Id_Area', '=', 'area_roles.Id_Area')
-        //  ->join('roles','roles.Id_Roles', '=', 'area_roles.Id_Roles')
-        //  //->select('area.Descripcion as Area',
-        //     ->select(
-        //      //   'area.Id_Area as Id_Area',
-        //         'roles.Descripcion as Rol',
-        //         'roles.nivel as nivel',
-        //         'roles.Id_Roles as Id_Roles',
-        //         'area_roles.Id_Area as Id_Area',
-        //         'area_roles.Id_area_roles as Id_area_roles')
-        //  ->orderBy('nivel','asc')
-        // ->get();           
-        // return $AreaRoles;
-
-
-               // $AreaRoles = AreasRolesModel::with('Area','Roles')->get();
-        // $AreaRoles=DB::table('area_roles')
-        // // ->join('area','area.Id_Area', '=', 'area_roles.Id_Area')
-        //  ->join('roles','roles.Id_Roles', '=', 'area_roles.Id_Roles')
-        //  //->select('area.Descripcion as Area',
-        //     ->select(
-        //      //   'area.Id_Area as Id_Area',
-        //         'roles.Descripcion as Rol',
-        //         'roles.nivel as nivel',
-        //         'roles.Id_Roles as Id_Roles',
-        //         'area_roles.Id_Area as Id_Area',
-        //         'area_roles.Id_area_roles as Id_area_roles')
-        //  ->orderBy('nivel','asc')
-        // ->get();           
-        // return $AreaRoles;
+          $AreaRoles = AreaModel::with('SubArea')->get();
+          return $AreaRoles;
     }
-
+       //LISTA LAS AREAS ROLES 
+    public function SubAreaPorArea($area){
+       
+          $AreaRoles = SubAreaModel::where('Id_Area',$area)->get();
+          return $AreaRoles;
+    }
         //LISTA LAS AREAS ROLES 
     public function AreasRolestabla(){
 
