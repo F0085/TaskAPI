@@ -55,8 +55,9 @@ class UsuariosRolesController extends Controller
     public function update(Request $request, $id)
     {
       $input = $request->all();
+
       $this->UserRoles->where('Id_Usuario', $id)->update($input);
-      return $this->UserRoles->find($id);
+      return $this->UserRoles->where('Id_Usuario', $id)->get();
     }
 
     /**

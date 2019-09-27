@@ -34,12 +34,7 @@ class AreasRolesController extends Controller
           return $AreaRoles;
     }
        //LISTA LAS AREAS ROLES 
-    public function SubAreaPorArea($area){
-       
-          $AreaRoles = SubAreaModel::where('Id_Area',$area)->get();
-          return $AreaRoles;
-    }
-        //LISTA LAS AREAS ROLES 
+//LISTA LAS AREAS ROLES 
     public function AreasRolestabla(){
 
 

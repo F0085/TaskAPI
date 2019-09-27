@@ -23,7 +23,8 @@ header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 
 
 //#########################  GESTIÓN USUARIOS ################################//
-	
+	route::get('buscarUsuario/{cedula}/{correo}', 'UsuariosController@buscarUsuario');
+
 	//CRUD TABLA USUARIOS
 	route::resource('Usuarios', 'UsuariosController');
 
@@ -56,12 +57,15 @@ header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 	route::get('MisTareasParticipantes/{idUsuario}', 'TareasController@MisTareasParticipantes');
 	route::get('MisTareasObservadores/{idUsuario}', 'TareasController@MisTareasObservadores');
 
-	//SUBA AREAS
+	//SUBAREAS
 	route::resource('SubArea', 'SubAreaController');
 	route::get('AreaSubArea', 'SubAreaController@AreaSubArea');
-	route::get('SubAreaPorArea/{area}', 'AreasRolesController@SubAreaPorArea');
-	
+	route::get('SubAreaPorArea/{area}', 'RolesController@SubAreaPorArea');
+	route::get('RolesPorSubArea/{subarea}', 'RolesController@RolesPorSubArea');
 
+	
+	
+	//TAREAS
 	route::resource('Tareas', 'TareasController');
 	route::get('TareasEstado/{estado}', 'TareasController@TareasEstado');
 	

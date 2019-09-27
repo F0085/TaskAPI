@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\RolesModel;
 use App\UsuarioRolesModel;
+use App\SubAreaModel;
 use DB;
 class RolesController extends Controller
 {
@@ -31,9 +32,22 @@ class RolesController extends Controller
 
     }
 
+    //SUBAREAS POR AREAS
+    public function SubAreaPorArea($area){
+       
+          $SubAreas = SubAreaModel::where('Id_Area',$area)->get();
+          return $SubAreas;
+    }
 
+    //ROLES POR SUBAREAS
+    public function RolesPorSubArea($subarea){
+       
+          $Roles = RolesModel::where('Id_Sub_Area',$subarea)->get();
+          return $Roles;
+    }
+    
 
-
+        
 
     public function UsuarioRolesRegistrar(Request $request)
     {
@@ -59,7 +73,21 @@ class RolesController extends Controller
 
     public function index(RolesModel $roles)
     {
-        return $roles->get();
+       $AreaRoles=DB::table('area')
+        // ->join('area','area.Id_Area', '=', 'area_roles.Id_Area')
+         ->join('sub_area','sub_area.Id_Area', '=', 'area.Id_Area')
+         ->join('roles','roles.Id_Sub_Area', '=', 'sub_area.Id_Sub_Area')
+         //->select('area.Descripcion as Area',
+            ->select(
+                'area.Id_Area as Id_Area',
+                'area.Descripcion as Area',
+                'sub_area.Descripcion as Sub_Area',
+                'roles.Descripcion as Rol',
+                'roles.nivel as nivel',
+                'roles.Id_Roles as Id_Roles')
+         ->orderBy('area.Descripcion','asc')
+        ->get();           
+        return $AreaRoles;
     }
 
     /**
@@ -82,6 +110,18 @@ class RolesController extends Controller
      */
     public function show($id)
     {
+        $AreaRoles=DB::table('area')
+         ->join('sub_area','sub_area.Id_Area', '=', 'area.Id_Area')
+         ->join('roles','roles.Id_Sub_Area', '=', 'sub_area.Id_Sub_Area')
+            ->select(
+                'area.Id_Area as Id_Area',
+                'area.Descripcion as Area',
+                'sub_area.Descripcion as Sub_Area',
+                'sub_area.Id_Sub_Area as Id_Sub_Area',
+                'roles.Descripcion as Rol',
+                'roles.Id_Roles as Id_Roles')->where('roles.Id_Roles','=',$id)
+        ->get();           
+        return $AreaRoles;
           return $this->roles->find($id);
     }
 

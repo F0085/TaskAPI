@@ -18,7 +18,7 @@ class AreaController extends Controller
         $this->area=$area;
     }
 
-   public function index(AreaModel $area)
+    public function index(AreaModel $area)
     {
         return $area->get();
     }

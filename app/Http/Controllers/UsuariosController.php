@@ -20,7 +20,7 @@ class UsuariosController extends Controller
     }
     
 
-    public function index(User $user)
+    public function index()
     {
         $usuarios=DB::table('usuarios')
         ->join('tipo_usuarios','tipo_usuarios.Id_Tipo_Usuario','=','usuarios.Id_tipo_Usuarios')
@@ -76,13 +76,20 @@ class UsuariosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //API PARA BUSCAR USUARIO PARA SABER SI ENCUENTRA REGISTRADO O NO
+    public function buscarUsuario($cedula,$correo){
+        $usuario = User::where('Cedula',$cedula)->orwhere('email',$correo)->first();
+        return $usuario;
+
+    }
     public function show($id)
     {
         $usuarios=DB::table('usuarios')
         ->join('tipo_usuarios','tipo_usuarios.Id_Tipo_Usuario','=','usuarios.Id_tipo_Usuarios')
         ->join('usuario_roles','usuario_roles.Id_Usuario','=','usuarios.Id_Usuario')
         ->join('roles','roles.Id_Roles','=','usuario_roles.Id_Roles')
-         ->join('area','area.Id_Area','=','usuario_roles.Id_Area')
+        ->join('sub_area','sub_area.Id_Sub_Area','=','roles.Id_Sub_Area')
+         ->join('area','area.Id_Area','=','sub_area.Id_Area')
         // ->join('area','area.Id_Area','=','area_roles.Id_Area')
 
         ->where('usuarios.Id_Usuario','=',$id)
@@ -99,9 +106,9 @@ class UsuariosController extends Controller
                  'roles.Descripcion as Rol',
                  'roles.Id_Roles as Id_Roles',
                  'area.Descripcion as Area',
-                 'area.Id_Area as Id_Area')
-                 // 'area.Descripcion as Area',
-                 // 'area.Id_Area as Id_Area')
+                 'area.Id_Area as Id_Area',
+                 'sub_area.Descripcion as SubArea',
+                 'sub_area.Id_Sub_Area as Id_Sub_Area')
         ->first();
         return Response()->json($usuarios);
     }
@@ -129,6 +136,6 @@ class UsuariosController extends Controller
     public function destroy($id)
     {
         $user = $this->user->destroy($id);
-       return 1;
+        return 1;
     }
 }
