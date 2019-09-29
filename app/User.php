@@ -28,9 +28,9 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $hidden = [
-        'Password',
-    ];
+    // protected $hidden = [
+    //     'Password',
+    // ];
 
 
     public function Responsables()

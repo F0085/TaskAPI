@@ -39,43 +39,19 @@ class UsuariosController extends Controller
         return Response()->json($usuarios);
     }
 
-
-    // public function Login($email,$clave){
-        
-    //     $usuario=$this->user->where([["email_token","=",$email],["password","=",$clave]])->get();
-    //     return $usuario;
-    // }
-
-
     public function Login(Request $request){
-
-      // $input = $request->all();
-      // $this->user->create($input);
-      // return [
-      //     'data' => $input
    
         $usuario=$this->user->where([["email","=",$request->email],["Password","=",$request->password]])->get();
         return $usuario;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
       $input = $request->all();
       return $this->user->create($input);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     //API PARA BUSCAR USUARIO PARA SABER SI ENCUENTRA REGISTRADO O NO
     public function buscarUsuario($cedula,$correo){
         $usuario = User::where('Cedula',$cedula)->orwhere('email',$correo)->first();
