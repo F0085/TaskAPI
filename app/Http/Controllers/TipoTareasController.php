@@ -24,7 +24,7 @@ class TipoTareasController extends Controller
 
      public function TipoTareasPerTra(TipoTareasModel $TipoTareas)
     {
-        return $TipoTareas->orwhere('Descripcion','Personal')->orwhere('Descripcion','Trabajo')->get();
+        return $TipoTareas->orwhere('Descripcion','Personal')->orwhere('Descripcion','Laboral')->get();
     }
 
 

@@ -67,7 +67,7 @@ header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 	
 	//TAREAS
 	route::resource('Tareas', 'TareasController');
-	route::get('TareasEstado/{estado}', 'TareasController@TareasEstado');
+	route::get('TareasEstado/{estado}/{idUsuario}', 'TareasController@TareasEstado');
 	
 	route::resource('Responsables', 'ResponsablesController');
 	route::resource('Participantes', 'ParticipantesController');
@@ -78,7 +78,7 @@ header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 
 	route::get('TipoTareasPerTra','TipoTareasController@TipoTareasPerTra');
 	
-	route::get('TareasPorTipo/{estado}/{tipo}','TareasController@TareasPorTipo');
+	route::get('TareasPorTipo/{estado}/{tipo}/{idUsuario}','TareasController@TareasPorTipo');
 
 	
 
