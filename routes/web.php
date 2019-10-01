@@ -80,7 +80,7 @@ header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 	
 	route::get('TareasPorTipo/{estado}/{tipo}/{idUsuario}','TareasController@TareasPorTipo');
 
-	
+	route::get('TareasPersonales/{idUsuario}','TareasController@TareasPersonales');
 
 	//EXTRAE LAS AREAS DE LAS RELACIONES DE AREASROLES
 	route::get('disntinArea', 'AreasRolesController@AreasRolesDistinct');
