@@ -65,22 +65,34 @@ header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 
 	
 	
-	//TAREAS
-	route::resource('Tareas', 'TareasController');
-	route::get('TareasEstado/{estado}/{idUsuario}', 'TareasController@TareasEstado');
+
 	
 	route::resource('Responsables', 'ResponsablesController');
 	route::resource('Participantes', 'ParticipantesController');
 	route::resource('Observadores', 'ObservadoresController');
 
+	//TAREAS
+	route::resource('Tareas', 'TareasController');
 
+	//CREADAS POR MI
+	route::get('TareasEstado/{estado}/{idUsuario}', 'TareasController@TareasEstado');
+
+	//PARA TRAER LOS TIPOS DE TAREAS
 	route::resource('TipoTareas','TipoTareasController');
 
+   //PARA TRAER EL TIPO DE TAREA PERSONAL Y LABORAL
 	route::get('TipoTareasPerTra','TipoTareasController@TipoTareasPerTra');
-	
+
+	//TAREAS POR TIPO DE TAREAS PERSONAL O LABORAL CON EL ESTADO DE PENDIENTE ETC
 	route::get('TareasPorTipo/{estado}/{tipo}/{idUsuario}','TareasController@TareasPorTipo');
 
+	//TRAER TAREAS PERSONALES
 	route::get('TareasPersonales/{idUsuario}','TareasController@TareasPersonales');
+
+	//PARA SABER SI TIENE TAREAS PENDIENTES
+	route::get('TareasPendientesPorTareas/{idtareas}/{idUsuario}','TareasController@TareasPendientesPorTareas');
+
+
 
 	//EXTRAE LAS AREAS DE LAS RELACIONES DE AREASROLES
 	route::get('disntinArea', 'AreasRolesController@AreasRolesDistinct');

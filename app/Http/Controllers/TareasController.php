@@ -61,6 +61,13 @@ class TareasController extends Controller
         return $res;
     }
 
+    //PARA SABER SI TIENE SUBTAREAS PENDIENTES
+    public function TareasPendientesPorTareas($idtareas,$idUsuario)
+    {
+          $respon = TareasModel::with('SubTareas')->where('Estado_Tarea','=','Pendiente')->where('tareasIdTareas','=',$idtareas)->where('Id_Usuario','=',$idUsuario)->get();
+          return $respon;
+    }
+
     /**
      * Show the form for creating a new resource.
      *
