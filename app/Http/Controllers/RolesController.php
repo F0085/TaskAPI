@@ -20,17 +20,17 @@ class RolesController extends Controller
     }
 
 
-    public function AreaRoles(){
-        $RolesAreas= DB::table('roles')
-        ->join('area','area.Id_Area','=','roles.Id_Area')
-        ->select('roles.Descripcion as Rol',
-                'roles.nivel as Nivel',
-                'area.Descripcion as Area',
-                'roles.Id_Roles as Id_Roles')
-        ->get();
-        return $RolesAreas;
+    // public function AreaRoles(){
+    //     $RolesAreas= DB::table('roles')
+    //     ->join('area','area.Id_Area','=','roles.Id_Area')
+    //     ->select('roles.Descripcion as Rol',
+    //             'roles.nivel as Nivel',
+    //             'area.Descripcion as Area',
+    //             'roles.Id_Roles as Id_Roles')
+    //     ->get();
+    //     return $RolesAreas;
 
-    }
+    // }
 
     //SUBAREAS POR AREAS
     public function SubAreaPorArea($area){

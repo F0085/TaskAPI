@@ -34,15 +34,15 @@ header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 	//CRUD TABLA ROLES
 	route::resource('Roles', 'RolesController');
 
-	//CRUD TABLA ROLES
-	route::resource('AreasRoles', 'AreasRolesController');
+	// //CRUD TABLA ROLES
+	// route::resource('AreasRoles', 'AreasRolesController');
 
-	//LISTA LAS AREAS CON LOS ROLES
-	route::get('ListAreaRoles', 'AreasRolesController@AreasRoles');
-	route::get('ListAreaRoles2', 'AreasRolesController@AreasRolestabla');
+	//LISTA LAS AREAS CON SUBAREAS Y ROLES PARA EL ORGANIGRAMA
+	route::get('Organigrama', 'OrganigramaController@Organigrama');
+	route::get('ListAreaRoles2', 'OrganigramaController@AreasRolestabla');
 
 	//ROLES POR IDAREA PARA LOS SELECT DEL REGISTRO DE USUARIOS
-	route::get('RolesArId/{AR}', 'AreasRolesController@AreasRolesID');
+	// route::get('RolesArId/{AR}', 'AreasRolesController@AreasRolesID');
 
 	//LOGIN CON EL EMAIL Y CONTRASEÑA
 	route::post('Login', 'UsuariosController@Login');
@@ -94,10 +94,10 @@ header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 
 
 
-	//EXTRAE LAS AREAS DE LAS RELACIONES DE AREASROLES
-	route::get('disntinArea', 'AreasRolesController@AreasRolesDistinct');
+	// //EXTRAE LAS AREAS DE LAS RELACIONES DE AREASROLES
+	// route::get('disntinArea', 'AreasRolesController@AreasRolesDistinct');
 
-	//EXTRAE LAS AREAS DE LAS RELACIONES DE AREASROLES
-	route::get('UserRoles/{area}/{rol}', 'GestioUsuariosController@UsuarioRoles');
+	// //EXTRAE LAS AREAS DE LAS RELACIONES DE AREASROLES
+	// route::get('UserRoles/{area}/{rol}', 'GestioUsuariosController@UsuarioRoles');
 
 
