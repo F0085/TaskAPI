@@ -21,6 +21,6 @@ class SubAreaModel extends Model
 
     public function Roles()
     {
-        return $this->hasMany('App\RolesModel', 'Id_Sub_Area', 'Id_Sub_Area');
+        return $this->hasMany('App\RolesModel', 'Id_Sub_Area', 'Id_Sub_Area')->with('UsuarioRoles');
     }
 }

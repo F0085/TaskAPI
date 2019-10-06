@@ -43,5 +43,10 @@ class User extends Authenticatable
         return $this->hasMany('App\TareasModel', 'Id_Usuario', 'Id_Usuario');
     }
 
+    public function UsuarioRoles()
+    {
+        return $this->hasMany('App\UsuarioRolesModel', 'Id_Usuario', 'Id_Usuario');
+    }
+
 
 }

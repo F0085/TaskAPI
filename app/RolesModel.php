@@ -19,4 +19,9 @@ class RolesModel extends Model
     {
         return $this->belongsTo('App\SubAreaModel', 'Id_Sub_Area', 'Id_Sub_Area');
     }
+
+        public function UsuarioRoles()
+    {
+        return $this->hasMany('App\UsuarioRolesModel', 'Id_Roles', 'Id_Roles')->with('Usuarios');
+    }
 }

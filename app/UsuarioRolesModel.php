@@ -13,4 +13,14 @@ class UsuarioRolesModel extends Model
     protected $fillable = [
         'Id_Usuario', 'Id_Roles','Id_Area'
     ];
+
+     public function Usuarios()
+    {
+        return $this->belongsTo('App\User', 'Id_Usuario', 'Id_Usuario');
+    }
+
+    public function Roles()
+    {
+        return $this->belongsTo('App\RolesModel', 'Id_Roles', 'Id_Roles');
+    }
 }
