@@ -23,7 +23,8 @@ header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 
 
 //#########################  GESTIÓN USUARIOS ################################//
-	route::get('buscarUsuario/{cedula}/{correo}', 'UsuariosController@buscarUsuario');
+	route::get('buscarUsuario/{correo}', 'UsuariosController@buscarUsuario');
+	route::get('buscarUsuarioPreparar/{cedula}', 'UsuariosController@buscarUsuarioPreparar');
 
 	//CRUD TABLA USUARIOS
 	route::resource('Usuarios', 'UsuariosController');
@@ -91,6 +92,11 @@ header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 
 	//PARA SABER SI TIENE TAREAS PENDIENTES
 	route::get('TareasPendientesPorTareas/{idtareas}/{idUsuario}','TareasController@TareasPendientesPorTareas');
+
+
+
+	//PARA TRAER LAS OBSERVACIONES
+	route::resource('Observaciones', 'ObservacionController');
 
 
 

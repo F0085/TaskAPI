@@ -53,8 +53,15 @@ class UsuariosController extends Controller
 
     
     //API PARA BUSCAR USUARIO PARA SABER SI ENCUENTRA REGISTRADO O NO
-    public function buscarUsuario($cedula,$correo){
-        $usuario = User::where('Cedula',$cedula)->orwhere('email',$correo)->first();
+    public function buscarUsuario($correo){
+        $usuario = User::where('email',$correo)->first();
+        return $usuario;
+
+    }
+
+    //API PARA BUSCAR USUARIO Y PREPARAR EL REGISTRO
+    public function buscarUsuarioPreparar($cedula){
+        $usuario = User::where('Cedula',$cedula)->first();
         return $usuario;
 
     }

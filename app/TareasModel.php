@@ -40,44 +40,22 @@ class TareasModel extends Model
     }
        public function SubTareas()
     {
-        return $this->hasMany('App\TareasModel', 'tareasIdTareas','Id_tarea')->with('Responsables','Participantes','Observadores','Usuario','SubTareas');
+        return $this->hasMany('App\TareasModel', 'tareasIdTareas','Id_tarea')->with('Responsables','Participantes','Observadores','Usuario','SubTareas','Observacion');
     }
 
     public function TipoTareas(){
         return $this->hasMany('App\TipoTareasModel','Id_Tipo_Tarea','Id_Tipo_Tarea');
     }
 
-
-    // public function SubTareas()
-    // {
-    //     return $this->belongsTo('App\TareasModel', 'Id_tarea','tareasIdTareas');
-    // }
-    //    public function SubTareas2()
-    // {
-    //     return $this->hasMany('App\TareasModel', 'tareasIdTareas','Id_tarea');
-    // }
-
+    public function Observacion()
+    {
+        return $this->hasMany('App\ObservacionModel', 'Id_Tarea', 'Id_tarea')->with('Usuario');
+    }
+    public function Documento()
+    {
+        return $this->hasMany('App\DocumentoModel', 'Id_Tarea', 'Id_tarea')->with('Usuario');
+    }
 
 
-//     public function SubTareas2()
-// {
-//    return $this->hasMany('App\TareasModel', 'Id_Tarea','Id_Tarea');
-// }
-// public function children_rec()
-// {
-//    return $this->SubTareas2()->with('children_rec');
-//    //which is equivalent to:
-//    //return $this->hasMany('App\CourseModule', 'parent')->with('children_rec);
-// }
-// //parent
-// public function SubTareas()
-// {
-//    return $this->belongsTo('App\TareasModel','Id_Tarea','tareasIdTareas');
-// }
 
-// //all ascendants
-// public function parent_rec()
-// {
-//    return $this->SubTareas()->with('parent_rec');
-// }
 }
