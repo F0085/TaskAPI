@@ -10,10 +10,10 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-// header('Access-Control-Allow-Origin: *');
-// header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
-// header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
-// header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
+header('Access-Control-Allow-Origin: *');
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
+header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 // $router->get('/', function () use ($router) {
 //     return $router->app->version();
 // });
