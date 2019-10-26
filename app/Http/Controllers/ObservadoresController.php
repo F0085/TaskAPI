@@ -76,7 +76,9 @@ class ObservadoresController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $input = $request->all();
+      $this->Observadores->where('Id_Tarea', $id)->update($input);
+      return $this->Observadores->where('Id_Tarea', $id)->get();
     }
 
     /**
@@ -87,6 +89,7 @@ class ObservadoresController extends Controller
      */
     public function destroy($id)
     {
-        //
+         $this->Observadores->where('Id_Tarea', $id)->delete();
+
     }
 }
