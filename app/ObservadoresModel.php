@@ -16,7 +16,7 @@ class ObservadoresModel extends Model
 
     public function Tarea()
     {
-        return $this->belongsTo('App\TareasModel', 'Id_Tarea', 'Id_tarea')->with('Responsables','Participantes','Usuario','Observadores');
+        return $this->belongsTo('App\TareasModel', 'Id_Tarea', 'Id_tarea')->with('Responsables','Participantes','Usuario','Observadores','TipoTareas');
     }
 
     public function Usuario()
