@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\DocumentoModel;
+use App\DocumentoModel;
 
 class DocumentoController extends Controller
 {
@@ -17,7 +17,7 @@ class DocumentoController extends Controller
     {
         $this->Documento=$Documento;
     }
-    public function index()
+    public function index(DocumentoModel $Documento)
     {
           return $Documento->get();
     }
