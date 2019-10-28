@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use app\DocumentoModel;
 
 class DocumentoController extends Controller
 {
@@ -11,9 +12,14 @@ class DocumentoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct(DocumentoModel $Documento)
+    {
+        $this->Documento=$Documento;
+    }
     public function index()
     {
-        //
+          return $Documento->get();
     }
 
     /**
@@ -34,7 +40,8 @@ class DocumentoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $input = $request->all();
+      return $this->Documento->create($input);
     }
 
     /**

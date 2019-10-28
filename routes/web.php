@@ -97,7 +97,9 @@ header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 
 	//PARA TRAER LAS OBSERVACIONES
 	route::resource('Observaciones', 'ObservacionController');
-
+	
+	//DOCUMENTOS
+	route::resource('Documento', 'DocumentoController');
 
 
 	// //EXTRAE LAS AREAS DE LAS RELACIONES DE AREASROLES
