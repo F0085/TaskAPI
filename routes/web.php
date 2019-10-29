@@ -101,6 +101,8 @@ header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 	//DOCUMENTOS
 	route::resource('Documento', 'DocumentoController');
 
+	//REUNION
+	route::resource('Reunion', 'ReunionController');
 
 	// //EXTRAE LAS AREAS DE LAS RELACIONES DE AREASROLES
 	// route::get('disntinArea', 'AreasRolesController@AreasRolesDistinct');
