@@ -120,6 +120,6 @@ header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 
 	route::resource('Reunio_Participante', 'Reunio_Participante_Controller');
 	route::resource('Reunio_Responsable', 'Reunio_Responsable_Controller');
-	route::PUT('ActualizarAsistencia', 'AsistenciaController@ActualizarAsistencia');
+	route::PUT('ActualizarAsistencia/{Id_Usuario}{IdReunion}', 'AsistenciaController@ActualizarAsistencia');
 	
 
