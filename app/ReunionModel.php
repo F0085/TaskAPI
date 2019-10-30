@@ -11,7 +11,7 @@ class ReunionModel extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'Tema','Descripcion', 'Orden_del_Dia' 'Lugar', 'Id_Usuario', 'FechadeReunion','HoraReunion','Estado'
+        'Tema','Descripcion', 'Orden_del_Dia', 'Lugar', 'Id_Usuario', 'FechadeReunion','HoraReunion','Estado'
     ];
 
 
