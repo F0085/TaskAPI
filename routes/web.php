@@ -111,3 +111,8 @@ header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 	// route::get('UserRoles/{area}/{rol}', 'GestioUsuariosController@UsuarioRoles');
 
 
+	//REUNIONES
+	//CREADAS POR MI
+	route::get('ReunionPorEstado_User/{estado}/{idUsuario}', 'ReunionController@ReunionPorEstado_User');
+
+
