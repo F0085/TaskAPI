@@ -115,4 +115,6 @@ header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 	//CREADAS POR MI
 	route::get('ReunionPorEstado_User/{estado}/{idUsuario}', 'ReunionController@ReunionPorEstado_User');
 
+route::get('MisReunionesResponsables/{idUsuario}', 'ReunionController@MisReunionesResponsables');
+route::get('MisReunionesParticipantes/{idUsuario}', 'ReunionController@MisReunionesParticipantes');
 

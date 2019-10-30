@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ReunionModel;
+use App\Reunio_Responsable_Model;
+use App\Reunio_Participante_Model;
+
 
 class ReunionController extends Controller
 {
@@ -29,6 +32,20 @@ class ReunionController extends Controller
     {
           $respon = ReunionModel::with('Usuario','Responsables','Participantes')->where('Estado','=',$estado)->where('Id_Usuario','=',$idUsuario)->get();
         return $respon;        
+    }
+
+      //TRAER REUNIONES POR RESPONSABLES 
+    public function MisReunionesResponsables($idUsuario)
+    {
+        $res=Reunio_Responsable_Model::with('Reunion','Usuario')->where('Id_Usuario','=',$idUsuario)->get();
+        return $res;
+    }
+
+      //TRAER REUNIONES POR PARTICIPANTES 
+    public function MisReunionesParticipantes($idUsuario)
+    {
+        $res=Reunio_Participante_Model::with('Reunion','Usuario')->where('Id_Usuario','=',$idUsuario)->get();
+        return $res;
     }
 
 
