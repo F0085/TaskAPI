@@ -82,7 +82,8 @@ class ReunionController extends Controller
      */
     public function show($id)
     {
-        //
+        $respon = TareasModel::with('Usuario','Responsables','Participantes')->where('Id_Reunion','=',$id)->get();
+        return $respon;  
     }
 
     /**
