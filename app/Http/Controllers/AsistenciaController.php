@@ -76,7 +76,7 @@ class AsistenciaController extends Controller
     public function ActualizarAsistencia(Request $request, $Id_Usuario,$IdReunion)
     {
       $input = $request->all();
-      $this->Asistencia->where('Id_Usuario', $Id_Usuario)->where('IdReunion',$Id_Reunion)->update($input);
+      $this->Asistencia->where('Id_Usuario', $Id_Usuario)->where('IdReunion',$IdReunion)->update($input);
       // return $this->Tareas ->find($id);
     }
 
