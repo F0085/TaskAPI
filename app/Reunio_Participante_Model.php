@@ -16,7 +16,7 @@ class Reunio_Participante_Model extends Model
 
     public function Reunion()
     {
-        return $this->belongsTo('App\ReunionModel', 'Id_Reunion', 'Id_Reunion')->with('Responsables','Usuario');
+        return $this->belongsTo('App\ReunionModel', 'Id_Reunion', 'Id_Reunion')->with('Responsables','Participantes','Usuario');
     }
 
     public function Usuario()
