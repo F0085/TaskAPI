@@ -54,7 +54,9 @@ class VerifyCsrfToken extends Middleware
         'SubArea',
         'SubArea/*',
         'Observaciones',
-        'Observaciones/*'
+        'Observaciones/*',
+        'Reunion',
+        'Reunion/*'
         
         
         
