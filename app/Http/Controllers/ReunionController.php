@@ -70,7 +70,8 @@ class ReunionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+      return $this->Reunion->create($input);
     }
 
     /**
