@@ -118,3 +118,6 @@ header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 route::get('MisReunionesResponsables/{idUsuario}', 'ReunionController@MisReunionesResponsables');
 route::get('MisReunionesParticipantes/{idUsuario}', 'ReunionController@MisReunionesParticipantes');
 
+route::resource('Reunio_Participante', 'Reunio_Participante_Controller');
+route::resource('Reunio_Responsable', 'Reunio_Responsable_Controller');
+
