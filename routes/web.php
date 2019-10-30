@@ -115,9 +115,9 @@ header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 	//CREADAS POR MI
 	route::get('ReunionPorEstado_User/{estado}/{idUsuario}', 'ReunionController@ReunionPorEstado_User');
 
-route::get('MisReunionesResponsables/{idUsuario}', 'ReunionController@MisReunionesResponsables');
-route::get('MisReunionesParticipantes/{idUsuario}', 'ReunionController@MisReunionesParticipantes');
+	route::get('MisReunionesResponsables/{idUsuario}', 'ReunionController@MisReunionesResponsables');
+	route::get('MisReunionesParticipantes/{idUsuario}', 'ReunionController@MisReunionesParticipantes');
 
-route::resource('Reunio_Participante', 'Reunio_Participante_Controller');
-route::resource('Reunio_Responsable', 'Reunio_Responsable_Controller');
+	route::resource('Reunio_Participante', 'Reunio_Participante_Controller');
+	route::resource('Reunio_Responsable', 'Reunio_Responsable_Controller');
 
