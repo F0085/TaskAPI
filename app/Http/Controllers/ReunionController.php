@@ -23,6 +23,16 @@ class ReunionController extends Controller
           $respon = ReunionModel::with('Usuario','Responsables','Participantes')->get();
         return $respon;        
     }
+
+    //TRAER REUNIONES POR ESTADO PENDIENTE Y POR EL USUARIO QUE LAS CREAR
+    public function ReunionPorEstado_User($estado ,$idUsuario)
+    {
+          $respon = ReunionModel::with('Usuario','Responsables','Participantes')->where('Estado','=',$estado)->where('Id_Usuario','=',$idUsuario)->get();
+        return $respon;        
+    }
+
+
+    
    
 
     /**
