@@ -73,10 +73,10 @@ class AsistenciaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function ActualizarAsistencia(Request $request, $Id_Usuario,$Id_Reunion)
+    public function ActualizarAsistencia(Request $request, $Id_Usuario,$IdReunion)
     {
       $input = $request->all();
-      $this->Asistencia->where('Id_Usuario', $Id_Usuario)->where('Id_Reunion',$Id_Reunion)->update($input);
+      $this->Asistencia->where('Id_Usuario', $Id_Usuario)->where('IdReunion',$Id_Reunion)->update($input);
       // return $this->Tareas ->find($id);
     }
 
