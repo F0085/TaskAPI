@@ -11,7 +11,7 @@ class Reunio_Participante_Model extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'Id_Reunion', 'Id_Usuario'
+        'Id_Reunion', 'Id_Usuario','asistencia'
     ];
 
     public function Reunion()
