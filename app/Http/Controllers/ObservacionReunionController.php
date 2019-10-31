@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\ObservacionReunionModel
+use App\ObservacionReunionModel;
 class ObservacionReunionController extends Controller
 {
     /**
@@ -18,7 +18,8 @@ class ObservacionReunionController extends Controller
 
     public function index(ObservacionReunionModel $Observacion)
     {
-        return $Observacion->get();
+        $observaciones = ObservacionReunionModel::with('Usuario','SubObservaciones')->where('Tipo','=','C')->get();
+        return $observaciones;
     }
     /**
      * Show the form for creating a new resource.
