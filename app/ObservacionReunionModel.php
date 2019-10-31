@@ -26,10 +26,10 @@ class ObservacionReunionModel extends Model
 
     public function Observacion()
     {
-        return $this->belongsTo('App\ObservacionReunionModel', 'Id_observacion_reunion','ObservacionID');
+        return $this->belongsTo('App\ObservacionReunionModel', 'Id_observacion_reunion','Observacion_ID');
     }
      public function SubObservaciones()
     {
-        return $this->hasMany('App\ObservacionReunionModel', 'ObservacionID','Id_observacion_reunion')->with('Usuario');
+        return $this->hasMany('App\ObservacionReunionModel', 'Observacion_ID','Id_observacion_reunion')->with('Usuario');
     }
 }
