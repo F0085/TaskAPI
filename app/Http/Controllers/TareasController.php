@@ -20,31 +20,25 @@ class TareasController extends Controller
     
     public function index()
     {
-          $respon = TareasModel::with('Usuario','Responsables','Participantes','Observadores','SubTareasPendientes','Observacion')->where('tip_tar','=','T')->get();
+          $respon = TareasModel::with('Usuario','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('tip_tar','=','T')->get();
                return $respon;        
     }
 
     public function TareasEstado($estado,$idUsuario)
     {
-        if($estado =='Pendiente'){
-            $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareasPendientes','Observacion')->where('tip_tar','=','T')->where('Estado_Tarea','=',$estado)->where('Id_Usuario','=',$idUsuario)->get();
+          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('tip_tar','=','T')->where('Estado_Tarea','=',$estado)->where('Id_Usuario','=',$idUsuario)->get();
           return $respon;
-        }else{
-            $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareasTerminadas','Observacion')->where('tip_tar','=','T')->where('Estado_Tarea','=',$estado)->where('Id_Usuario','=',$idUsuario)->get();
-          return $respon;
-        }
-
     }
 
     public function TareasPersonales($idUsuario)
     {
-          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareasPendientes','Observacion')->where('tip_tar','=','T')->where('Id_Usuario','=',$idUsuario)->where('Id_Tipo_Tarea','=','4')->get();
+          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('tip_tar','=','T')->where('Id_Usuario','=',$idUsuario)->where('Id_Tipo_Tarea','=','4')->get();
           return $respon;
     }
 
     public function TareasPorTipo($estado,$tipo,$idUsuario)
     {
-          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareasPendientes','Observacion','TipoTareas')->where('tip_tar','=','T')->where('Estado_Tarea','=',$estado)->where('Id_Tipo_Tarea','=',$tipo)->where('Id_Usuario','=',$idUsuario)->get();
+          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion','TipoTareas')->where('tip_tar','=','T')->where('Estado_Tarea','=',$estado)->where('Id_Tipo_Tarea','=',$tipo)->where('Id_Usuario','=',$idUsuario)->get();
           return $respon;
     }
 
