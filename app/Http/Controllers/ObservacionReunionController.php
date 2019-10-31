@@ -39,7 +39,8 @@ class ObservacionReunionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        return $this->Observacion->create($input);
     }
 
     /**

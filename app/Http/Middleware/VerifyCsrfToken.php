@@ -62,7 +62,10 @@ class VerifyCsrfToken extends Middleware
         'Reunio_Responsable',
         'Reunio_Responsable/*',
         'ActualizarAsistencia',
-        'ActualizarAsistencia/*'
+        'ActualizarAsistencia/*',
+        'ObservacionesReuniones',
+        'ObservacionesReuniones/*'
+        
         
         
         
