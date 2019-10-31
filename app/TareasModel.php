@@ -40,12 +40,12 @@ class TareasModel extends Model
     }
     public function SubTareasPendientes()
     {
-        return $this->hasMany('App\TareasModel', 'tareasIdTareas','Id_tarea')->where('Estado_Tarea','Pendiente')->with('Responsables','Participantes','Observadores','Usuario','SubTareas','Observacion','TipoTareas');
+        return $this->hasMany('App\TareasModel', 'tareasIdTareas','Id_tarea')->where('Estado_Tarea','=','Pendiente')->with('Responsables','Participantes','Observadores','Usuario','SubTareas','Observacion','TipoTareas');
     }
 
     public function SubTareasTerminadas()
     {
-        return $this->hasMany('App\TareasModel', 'tareasIdTareas','Id_tarea')->where('Estado_Tarea','Terminada')->with('Responsables','Participantes','Observadores','Usuario','SubTareas','Observacion','TipoTareas');
+        return $this->hasMany('App\TareasModel', 'tareasIdTareas','Id_tarea')->where('Estado_Tarea','=','Terminada')->with('Responsables','Participantes','Observadores','Usuario','SubTareas','Observacion','TipoTareas');
     }
 
     public function TipoTareas(){
