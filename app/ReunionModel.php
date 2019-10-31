@@ -30,4 +30,9 @@ class ReunionModel extends Model
         return $this->belongsTo('App\User', 'Id_Usuario', 'Id_Usuario');
     }
 
+    public function Observacion()
+    {
+        return $this->hasMany('App\ObservacionReunionModel', 'Id_Reunion', 'Id_Reunion')->with('Usuario');
+    }
+
 }
