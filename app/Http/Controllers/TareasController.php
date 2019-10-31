@@ -32,13 +32,13 @@ class TareasController extends Controller
 
     public function TareasPersonales($idUsuario)
     {
-          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('tip_tar','=','T')->where('Id_Usuario','=',$idUsuario)->where('Id_Tipo_Tarea','=','4')->get();
+          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion')->orderBy('FechaFin', 'asc')->where('tip_tar','=','T')->where('Id_Usuario','=',$idUsuario)->where('Id_Tipo_Tarea','=','4')->get();
           return $respon;
     }
 
     public function TareasPorTipo($estado,$tipo,$idUsuario)
     {
-          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion','TipoTareas')->where('tip_tar','=','T')->where('Estado_Tarea','=',$estado)->where('Id_Tipo_Tarea','=',$tipo)->where('Id_Usuario','=',$idUsuario)->get();
+          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion','TipoTareas')->where('tip_tar','=','T')->orderBy('FechaFin', 'asc')->where('Estado_Tarea','=',$estado)->where('Id_Tipo_Tarea','=',$tipo)->where('Id_Usuario','=',$idUsuario)->get();
           return $respon;
     }
 
