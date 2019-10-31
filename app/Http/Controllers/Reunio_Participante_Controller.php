@@ -78,7 +78,7 @@ class Reunio_Participante_Controller extends Controller
     public function ActualizarAsistencia(Request $request, $Id_Usuario,$IdReunion)
     {
       $input = $request->all();
-      $this->Participantes->where('Id_Usuario', $Id_Usuario)->where('Id-Reunion',$IdReunion)->update($input);
+      $this->Participantes->where('Id_Usuario', $Id_Usuario)->where('Id_Reunion',$IdReunion)->update($input);
       // return $this->Tareas ->find($id);
     }
 
