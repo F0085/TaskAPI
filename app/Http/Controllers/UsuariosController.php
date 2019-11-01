@@ -32,6 +32,10 @@ class UsuariosController extends Controller
                  'usuarios.Direccion as Direccion',
                  'usuarios.Celular as Celular',
                  'usuarios.Sexo as Sexo',
+                 'usuarios.Instagram as Instagram',
+                 'usuarios.Facebook as Facebook',
+                 'usuarios.Twitter as Twitter',
+                 'usuarios.Fecha_Nacimiento as Fecha_Nacimiento',
                  'tipo_usuarios.Descripcion as TipoUsuario',
                  'tipo_usuarios.Id_Tipo_Usuario as Id_Tipo_Usuario')
         ->orderBy('usuarios.Id_Usuario', 'asc')
