@@ -47,7 +47,7 @@ class TareasController extends Controller
 
     public function TareasPorTipo($estado,$tipo,$idUsuario)
     {
-          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion','TipoTareas')->where('tip_tar','=','T')->orderBy('FechaFin', 'asc')->where('Estado_Tarea','=',$estado)->where('Id_Tipo_Tarea','=',$tipo)->where('Id_Usuario','=',$idUsuario)->get();
+          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion','TipoTareas')->orderBy('FechaFin', 'asc')->where('Estado_Tarea','=',$estado)->where('Id_Tipo_Tarea','=',$tipo)->where('Id_Usuario','=',$idUsuario)->get();
           return $respon;
     }
 
