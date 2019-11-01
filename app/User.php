@@ -20,7 +20,7 @@ class User extends Authenticatable
     public $timestamps = false;
 
     protected $fillable = [
-        'Nombre', 'Apellido', 'Cedula', 'email','Direccion','Celular','Sexo','Id_tipo_Usuarios','Password'
+        'Nombre', 'Apellido', 'Cedula', 'email','Direccion','Celular','Sexo','Id_tipo_Usuarios','Password','Instagram','Twitter','Facebook','Fecha_Nacimiento'
     ];
 
     /**
