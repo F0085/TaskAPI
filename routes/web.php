@@ -92,7 +92,7 @@ header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 
 	//PARA SABER SI TIENE TAREAS PENDIENTES
 	route::get('TareasPendientesPorTareas/{idtareas}/{idUsuario}','TareasController@TareasPendientesPorTareas');
-
+	route::get('tareasCPM/{estado}','TareasController@tareasCPM');
 
 
 	//PARA TRAER LAS OBSERVACIONES DE TAREAS

@@ -21,11 +21,17 @@ class TareasController extends Controller
     public function index()
     {
 
-          $respon = TareasModel::with('Usuario','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('Estado_Tarea','=','Terminada')->get();
-               return $respon; 
-          // $respon = TareasModel::with('Usuario','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('tip_tar','=','T')->get();
-          //      return $respon;        
+          $respon = TareasModel::with('Usuario','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('tip_tar','=','T')->get();
+               return $respon;        
     }
+
+    public function tareasCPM($estado)
+    {
+
+          $respon = TareasModel::with('Usuario','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('Estado_Tarea','=',$estado)->get();
+               return $respon;        
+    }
+
 
     public function TareasEstado($estado,$idUsuario)
     {
