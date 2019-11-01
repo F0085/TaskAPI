@@ -87,6 +87,9 @@ header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 	//TAREAS POR TIPO DE TAREAS PERSONAL O LABORAL CON EL ESTADO DE PENDIENTE ETC
 	route::get('TareasPorTipo/{estado}/{tipo}/{idUsuario}','TareasController@TareasPorTipo');
 
+	route::get('TareasPorTipoPendiente/{estado}/{tipo}/{idUsuario}','TareasController@TareasPorTipoPendiente');
+	
+
 	//TRAER TAREAS PERSONALES
 	route::get('TareasPersonales/{idUsuario}','TareasController@TareasPersonales');
 
