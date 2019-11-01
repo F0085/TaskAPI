@@ -133,4 +133,7 @@ header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 
 	//ADMINISTRADOR
 	route::get('TareasAdministrador/{estado}', 'TareasController@TareasAdministrador');
+
+	route::get('TareasEstadoAdministrador/{estado}', 'TareasController@TareasEstadoAdministrador');
+	
 	

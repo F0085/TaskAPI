@@ -45,6 +45,12 @@ class TareasController extends Controller
           return $respon;
     }
 
+    public function TareasEstadoAdministrador($estado)
+    {
+          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('tip_tar','=','T')->where('Estado_Tarea','=',$estado)->get();
+          return $respon;
+    }
+
     public function TareasPersonales($idUsuario)
     {
           $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion')->orderBy('FechaFin', 'asc')->where('tip_tar','=','T')->where('Id_Usuario','=',$idUsuario)->where('Id_Tipo_Tarea','=','4')->get();
