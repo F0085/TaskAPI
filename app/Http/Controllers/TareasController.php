@@ -20,8 +20,11 @@ class TareasController extends Controller
     
     public function index()
     {
-          $respon = TareasModel::with('Usuario','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('tip_tar','=','T')->get();
-               return $respon;        
+
+          $respon = TareasModel::with('Usuario','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('Estado_Tarea','=','Terminada')->get();
+               return $respon; 
+          // $respon = TareasModel::with('Usuario','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('tip_tar','=','T')->get();
+          //      return $respon;        
     }
 
     public function TareasEstado($estado,$idUsuario)
@@ -42,16 +45,19 @@ class TareasController extends Controller
           return $respon;
     }
 
+
     //TRAER TAREAS POR RESPONSABLES LOGUEADO
     public function MisTareasResponsables($idUsuario)
     {
         $res=ResponsablesModel::with('Tarea','Usuario')->where('Id_Usuario','=',$idUsuario)->get();
+
         return $res;
     }
     //TRAER TAREAS POR PARTICPANTE LOGUEADO
     public function MisTareasParticipantes($idUsuario)
     {
         $res=ParticipantesModel::with('Tarea','Usuario')->where('Id_Usuario','=',$idUsuario)->get();
+
         return $res;
     }
     //TRAER TAREAS POR OBSERVADOR LOGUEADO
