@@ -53,7 +53,8 @@ class DocumentoController extends Controller
      */
     public function show($id)
     {
-        //
+        $respon = DocumentoModel::with('Usuario')->where('Id_Tarea','=',$id)->get();
+               return $respon; 
     }
 
     /**
