@@ -22,6 +22,6 @@ class DocumentoModel extends Model
 
     public function Tarea()
     {
-        return $this->belongsTo('App\TareasModel', 'Id_tarea', 'Id_Tarea');
+        return $this->belongsTo('App\TareasModel', 'Id_Tarea', 'Id_Tarea');
     }
 }
