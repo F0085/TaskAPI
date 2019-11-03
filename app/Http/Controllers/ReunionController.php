@@ -106,7 +106,9 @@ class ReunionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+     $input = $request->all();
+      $this->Reunion->where('Id_Reunion', $id)->update($input);
+      return $this->Reunion ->find($id);
     }
 
     /**
