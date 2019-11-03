@@ -11,7 +11,7 @@ class DocumentoModel extends Model
     public $timestamps=false;
 
     protected $fillable = [
-        'Id_Tarea', 'Id_Usuario','Descripcion','Ruta'
+        'Id_Tarea', 'Id_Usuario','Descripcion','Ruta','Fecha'
     ];
 
 
