@@ -19,7 +19,7 @@ class DocumentoController extends Controller
     }
     public function index(DocumentoModel $Documento)
     {
-       $respon = DocumentoModel::with('Usuario','Tarea')->get();
+       $respon = DocumentoModel::with('Usuario')->get();
                return $respon;   
     }
 
