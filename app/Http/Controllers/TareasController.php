@@ -190,7 +190,7 @@ class TareasController extends Controller
                 $vencida=$vencida+1;
             }
 
-            $Efectividad=($terminada*$totalRespo)/100;
+            $Efectividad=($terminada/$totalRespo)*100;
           }
            $dato['Total_Responsables']= ($totalRespo);
            $dato['Total_Pendiente']= ($pendiente);
