@@ -174,11 +174,26 @@ class TareasController extends Controller
         $vencida=0;
         $totalRespo=0;
         $Efectividad=0;
+        $Laboral=0;
+        $Personal=0;
         $dato=array();
-
+        $c=0;
         //$cont=ResponsablesModel::where('Id_Usuario','=','120')->count();
           $res=ResponsablesModel::with('Tarea')-> where('Id_Usuario','=',$Id_Usuario)->get();
           foreach ($res as $key => $value) {
+            
+             // dd($value['Tarea']['TipoTareas'][$key]['Descripcion']);
+            if($value['Tarea']['TipoTareas'][0]['Descripcion']=="Laboral" && $value['tarea']['Estado_Tarea']=='Pendiente'){
+                $Laboral=$Laboral+1;
+            }
+            if($value['Tarea']['TipoTareas'][0]['Descripcion']=='Personal' && $value['tarea']['Estado_Tarea']=='Pendiente'){
+                $Personal=$Personal+1;
+
+            }
+    
+            // foreach ($value['Tarea'] as $key2 => $valuetarea) {
+            //     dd($valuetarea);
+            // }
             $totalRespo=$totalRespo+1;
             if(($value['tarea']['Estado_Tarea'])=='Pendiente'){
                 $pendiente=$pendiente+1;
@@ -191,12 +206,15 @@ class TareasController extends Controller
             }
 
             $Efectividad=($terminada/$totalRespo)*100;
+            $c=$c+1;
           }
            $dato['Total_Responsables']= ($totalRespo);
            $dato['Total_Pendiente']= ($pendiente);
            $dato['Total_Terminada']= ($terminada);
            $dato['Total_Vencida']= ($vencida);
            $dato['Efectividad']= ($Efectividad);
+            $dato['Laboral']= ($Laboral);
+             $dato['Personal']= ($Personal);
 
 
            return $dato;
