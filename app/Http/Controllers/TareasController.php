@@ -167,4 +167,34 @@ class TareasController extends Controller
     {
         //
     }
+
+    public function TotalTareasResponsables($Id_Usuario){
+        $pendiente=0;
+        $terminada=0;
+        $vencida=0;
+        $totalRespo=0;
+        $dato=array();
+
+        //$cont=ResponsablesModel::where('Id_Usuario','=','120')->count();
+          $res=ResponsablesModel::with('Tarea')-> where('Id_Usuario','=',$Id_Usuario)->get();
+          foreach ($res as $key => $value) {
+            $totalRespo=$totalRespo+1;
+            if(($value['tarea']['Estado_Tarea'])=='Pendiente'){
+                $pendiente=$pendiente+1;
+            }
+            if(($value['tarea']['Estado_Tarea'])=='Terminada'){
+                $terminada=$terminada+1;
+            }
+            if(($value['tarea']['Estado_Tarea'])=='Vencida'){
+                $vencida=$vencida+1;
+            }
+          }
+           $dato['Total_Responsables']= ($totalRespo);
+           $dato['Total_Pendiente']= ($pendiente);
+           $dato['Total_Terminada']= ($terminada);
+           $dato['Total_Vencida']= ($vencida);
+           return $dato;
+       
+
+    }
 }
