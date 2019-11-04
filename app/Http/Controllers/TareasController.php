@@ -173,6 +173,7 @@ class TareasController extends Controller
         $terminada=0;
         $vencida=0;
         $totalRespo=0;
+        $Efectividad=0;
         $dato=array();
 
         //$cont=ResponsablesModel::where('Id_Usuario','=','120')->count();
@@ -188,11 +189,16 @@ class TareasController extends Controller
             if(($value['tarea']['Estado_Tarea'])=='Vencida'){
                 $vencida=$vencida+1;
             }
+
+            $Efectividad=($terminada*$totalRespo)/100;
           }
            $dato['Total_Responsables']= ($totalRespo);
            $dato['Total_Pendiente']= ($pendiente);
            $dato['Total_Terminada']= ($terminada);
            $dato['Total_Vencida']= ($vencida);
+           $dato['Efectividad']= ($Efectividad);
+
+
            return $dato;
        
 
