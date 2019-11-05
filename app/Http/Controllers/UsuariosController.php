@@ -24,6 +24,10 @@ class UsuariosController extends Controller
     {
         $usuarios=DB::table('usuarios')
         ->join('tipo_usuarios','tipo_usuarios.Id_Tipo_Usuario','=','usuarios.Id_tipo_Usuarios')
+        ->join('usuario_roles','usuario_roles.Id_Usuario','=','usuarios.Id_Usuario')
+        ->join('roles','roles.Id_Roles','=','usuario_roles.Id_Roles')
+        ->join('sub_area','sub_area.Id_Sub_Area','=','roles.Id_Sub_Area')
+        ->join('area','area.Id_Area','=','sub_area.Id_Area')
         ->select('usuarios.Id_Usuario as Id_Usuario',
                  'usuarios.Nombre as Nombre',
                  'usuarios.Apellido as Apellido',
@@ -38,7 +42,14 @@ class UsuariosController extends Controller
                  'usuarios.Fecha_Nacimiento as Fecha_Nacimiento',
                  'usuarios.Intereses as Intereses',
                  'tipo_usuarios.Descripcion as TipoUsuario',
-                 'tipo_usuarios.Id_Tipo_Usuario as Id_Tipo_Usuario')
+                 'tipo_usuarios.Id_Tipo_Usuario as Id_Tipo_Usuario',
+                 'area.Descripcion as Area',
+                 'area.Id_Area as Id_Area',
+                 'sub_area.Descripcion as Sub_Area',
+                 'sub_area.Id_Sub_Area as Id_Sub_Area',
+                 'roles.Descripcion as Rol',
+                 'roles.Id_Roles as Id_Roles')
+        
         ->orderBy('usuarios.Id_Usuario', 'asc')
         ->get();
         return Response()->json($usuarios);
@@ -72,14 +83,12 @@ class UsuariosController extends Controller
     }
     public function show($id)
     {
-        $usuarios=DB::table('usuarios')
+         $usuarios=DB::table('usuarios')
         ->join('tipo_usuarios','tipo_usuarios.Id_Tipo_Usuario','=','usuarios.Id_tipo_Usuarios')
         ->join('usuario_roles','usuario_roles.Id_Usuario','=','usuarios.Id_Usuario')
         ->join('roles','roles.Id_Roles','=','usuario_roles.Id_Roles')
         ->join('sub_area','sub_area.Id_Sub_Area','=','roles.Id_Sub_Area')
-         ->join('area','area.Id_Area','=','sub_area.Id_Area')
-        // ->join('area','area.Id_Area','=','area_roles.Id_Area')
-
+        ->join('area','area.Id_Area','=','sub_area.Id_Area')
         ->where('usuarios.Id_Usuario','=',$id)
         ->select('usuarios.Id_Usuario as Id_Usuario',
                  'usuarios.Nombre as Nombre',
@@ -95,7 +104,13 @@ class UsuariosController extends Controller
                  'usuarios.Fecha_Nacimiento as Fecha_Nacimiento',
                  'usuarios.Intereses as Intereses',
                  'tipo_usuarios.Descripcion as TipoUsuario',
-                 'tipo_usuarios.Id_Tipo_Usuario as Id_Tipo_Usuario')
+                 'tipo_usuarios.Id_Tipo_Usuario as Id_Tipo_Usuario',
+                 'area.Descripcion as Area',
+                 'area.Id_Area as Id_Area',
+                 'sub_area.Descripcion as Sub_Area',
+                 'sub_area.Id_Sub_Area as Id_Sub_Area',
+                 'roles.Descripcion as Rol',
+                 'roles.Id_Roles as Id_Roles')
         ->orderBy('usuarios.Id_Usuario', 'asc')
         ->first();
         return Response()->json($usuarios);
