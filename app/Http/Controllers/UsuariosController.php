@@ -32,6 +32,11 @@ class UsuariosController extends Controller
                  'usuarios.Direccion as Direccion',
                  'usuarios.Celular as Celular',
                  'usuarios.Sexo as Sexo',
+                 'usuarios.Instagram as Instagram',
+                 'usuarios.Facebook as Facebook',
+                 'usuarios.Twitter as Twitter',
+                 'usuarios.Fecha_Nacimiento as Fecha_Nacimiento',
+                 'usuarios.Intereses as Intereses',
                  'tipo_usuarios.Descripcion as TipoUsuario',
                  'tipo_usuarios.Id_Tipo_Usuario as Id_Tipo_Usuario')
         ->orderBy('usuarios.Id_Usuario', 'asc')
@@ -84,14 +89,14 @@ class UsuariosController extends Controller
                  'usuarios.Direccion as Direccion',
                  'usuarios.Celular as Celular',
                  'usuarios.Sexo as Sexo',
+                 'usuarios.Instagram as Instagram',
+                 'usuarios.Facebook as Facebook',
+                 'usuarios.Twitter as Twitter',
+                 'usuarios.Fecha_Nacimiento as Fecha_Nacimiento',
+                 'usuarios.Intereses as Intereses',
                  'tipo_usuarios.Descripcion as TipoUsuario',
-                 'tipo_usuarios.Id_Tipo_Usuario as Id_Tipo_Usuario',
-                 'roles.Descripcion as Rol',
-                 'roles.Id_Roles as Id_Roles',
-                 'area.Descripcion as Area',
-                 'area.Id_Area as Id_Area',
-                 'sub_area.Descripcion as SubArea',
-                 'sub_area.Id_Sub_Area as Id_Sub_Area')
+                 'tipo_usuarios.Id_Tipo_Usuario as Id_Tipo_Usuario')
+        ->orderBy('usuarios.Id_Usuario', 'asc')
         ->first();
         return Response()->json($usuarios);
     }

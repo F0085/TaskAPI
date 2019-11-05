@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\DocumentoModel;
 
 class DocumentoController extends Controller
 {
@@ -11,9 +12,15 @@ class DocumentoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function __construct(DocumentoModel $Documento)
     {
-        //
+        $this->Documento=$Documento;
+    }
+    public function index(DocumentoModel $Documento)
+    {
+       $respon = DocumentoModel::with('Usuario')->get();
+               return $respon;   
     }
 
     /**
@@ -34,7 +41,8 @@ class DocumentoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $input = $request->all();
+      return $this->Documento->create($input);
     }
 
     /**
@@ -45,7 +53,8 @@ class DocumentoController extends Controller
      */
     public function show($id)
     {
-        //
+        $respon = DocumentoModel::with('Usuario')->where('Id_Tarea','=',$id)->get();
+               return $respon; 
     }
 
     /**

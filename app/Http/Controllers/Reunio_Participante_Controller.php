@@ -3,22 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\ObservadoresModel;
-class ObservadoresController extends Controller
+use App\Reunio_Participante_Model;
+
+class Reunio_Participante_Controller extends Controller
 {
-    /**
+/**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct(ObservadoresModel $Observadores)
+    public function __construct(Reunio_Participante_Model $Participantes)
     {
-        $this->Observadores=$Observadores;
+        $this->Participantes=$Participantes;
     }
 
-    public function index(ObservadoresModel $Observadores)
+    public function index(Reunio_Participante_Model $Participantes)
     {
-        return $Observadores->get();
+        return $Participantes->get();
     }
 
     /**
@@ -42,7 +43,7 @@ class ObservadoresController extends Controller
     public function store(Request $request)
     {
       $input = $request->all();
-      return $this->Observadores->create($input);
+      return $this->Participantes->create($input);
     }
 
     /**
@@ -74,11 +75,17 @@ class ObservadoresController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function ActualizarAsistencia(Request $request, $Id_Usuario,$IdReunion)
     {
       $input = $request->all();
-      $this->Observadores->where('Id_Tarea', $id)->update($input);
-      return $this->Observadores->where('Id_Tarea', $id)->get();
+      $this->Participantes->where('Id_Usuario', $Id_Usuario)->where('Id_Reunion',$IdReunion)->update($input);
+      // return $this->Tareas ->find($id);
+    }
+
+
+    public function update(Request $request, $id)
+    {
+        //
     }
 
     /**
@@ -89,7 +96,6 @@ class ObservadoresController extends Controller
      */
     public function destroy($id)
     {
-         $this->Observadores->where('Id_Tarea', $id)->delete();
-
+           $this->Participantes->where('Id_Tarea', $id)->delete();
     }
 }

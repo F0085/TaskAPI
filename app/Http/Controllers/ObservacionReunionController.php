@@ -3,31 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\ObservadoresModel;
-class ObservadoresController extends Controller
+use App\ObservacionReunionModel;
+class ObservacionReunionController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct(ObservadoresModel $Observadores)
+  public function __construct(ObservacionReunionModel $Observacion)
     {
-        $this->Observadores=$Observadores;
+        $this->Observacion=$Observacion;
     }
 
-    public function index(ObservadoresModel $Observadores)
+    public function index(ObservacionReunionModel $Observacion)
     {
-        return $Observadores->get();
+        $observaciones = ObservacionReunionModel::with('Usuario','SubObservaciones')->where('Tipo','=','C')->get();
+        return $observaciones;
     }
-
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
- 
-
     public function create()
     {
         //
@@ -41,8 +39,8 @@ class ObservadoresController extends Controller
      */
     public function store(Request $request)
     {
-      $input = $request->all();
-      return $this->Observadores->create($input);
+        $input = $request->all();
+        return $this->Observacion->create($input);
     }
 
     /**
@@ -53,7 +51,8 @@ class ObservadoresController extends Controller
      */
     public function show($id)
     {
-        //
+        $observaciones = ObservacionReunionModel::with('Usuario','SubObservaciones')->where('Id_Reunion','=',$id)->where('Tipo','=','C')->get();
+        return $observaciones;
     }
 
     /**
@@ -76,9 +75,7 @@ class ObservadoresController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $input = $request->all();
-      $this->Observadores->where('Id_Tarea', $id)->update($input);
-      return $this->Observadores->where('Id_Tarea', $id)->get();
+        //
     }
 
     /**
@@ -89,7 +86,6 @@ class ObservadoresController extends Controller
      */
     public function destroy($id)
     {
-         $this->Observadores->where('Id_Tarea', $id)->delete();
-
+        //
     }
 }

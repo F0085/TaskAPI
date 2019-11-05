@@ -20,38 +20,68 @@ class TareasController extends Controller
     
     public function index()
     {
+
           $respon = TareasModel::with('Usuario','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('tip_tar','=','T')->get();
                return $respon;        
     }
 
+    public function tareasCPM($estado)
+    {
+
+          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('Estado_Tarea','=',$estado)->get();
+               return $respon;        
+    }
+
+
     public function TareasEstado($estado,$idUsuario)
     {
-          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('tip_tar','=','T')->where('Estado_Tarea','=',$estado)->where('Id_Usuario','=',$idUsuario)->get();
+          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('tip_tar','=','T')->where('Estado_Tarea','=',$estado)->where('Id_Usuario','=',$idUsuario)->orderBy('FechaFin', 'asc')->get();
+          return $respon;
+    }
+
+    public function TareasAdministrador($estado)
+    {
+          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('tip_tar','=','T')->where('Estado_Tarea','=',$estado)->orderBy('FechaFin', 'asc')->get();
+          return $respon;
+    }
+
+    public function TareasEstadoAdministrador($estado)
+    {
+          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('Estado_Tarea','=',$estado)->get();
           return $respon;
     }
 
     public function TareasPersonales($idUsuario)
     {
-          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('tip_tar','=','T')->where('Id_Usuario','=',$idUsuario)->where('Id_Tipo_Tarea','=','4')->get();
+          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion')->orderBy('FechaFin', 'asc')->where('tip_tar','=','T')->where('Id_Usuario','=',$idUsuario)->where('Id_Tipo_Tarea','=','4')->get();
           return $respon;
     }
 
     public function TareasPorTipo($estado,$tipo,$idUsuario)
     {
-          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('tip_tar','=','T')->where('Estado_Tarea','=',$estado)->where('Id_Tipo_Tarea','=',$tipo)->where('Id_Usuario','=',$idUsuario)->get();
+          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion','TipoTareas')->orderBy('FechaFin', 'asc')->where('Estado_Tarea','=',$estado)->where('Id_Tipo_Tarea','=',$tipo)->where('Id_Usuario','=',$idUsuario)->get();
           return $respon;
     }
+
+    public function TareasPorTipoPendiente($estado,$tipo,$idUsuario)
+    {
+          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion','TipoTareas')->orderBy('FechaFin', 'asc')->where('Estado_Tarea','=',$estado)->where('Id_Tipo_Tarea','=',$tipo)->where('tip_tar','=','T')->where('Id_Usuario','=',$idUsuario)->get();
+          return $respon;
+    }
+
 
     //TRAER TAREAS POR RESPONSABLES LOGUEADO
     public function MisTareasResponsables($idUsuario)
     {
         $res=ResponsablesModel::with('Tarea','Usuario')->where('Id_Usuario','=',$idUsuario)->get();
+
         return $res;
     }
     //TRAER TAREAS POR PARTICPANTE LOGUEADO
     public function MisTareasParticipantes($idUsuario)
     {
         $res=ParticipantesModel::with('Tarea','Usuario')->where('Id_Usuario','=',$idUsuario)->get();
+
         return $res;
     }
     //TRAER TAREAS POR OBSERVADOR LOGUEADO
@@ -98,7 +128,7 @@ class TareasController extends Controller
      */
     public function show($id)
     {
-          $respon = TareasModel::with('Usuario','Responsables','Participantes','Observadores','SubTareas','Observacion','Documento')->where('Id_Tarea','=',$id)->get();
+          $respon = TareasModel::with('Usuario','Responsables','Participantes','Observadores','SubTareas','Observacion','Documento','TipoTareas')->where('Id_Tarea','=',$id)->get();
                return $respon;  
     }
 
@@ -136,5 +166,59 @@ class TareasController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function TotalTareasResponsables($Id_Usuario){
+        $pendiente=0;
+        $terminada=0;
+        $vencida=0;
+        $totalRespo=0;
+        $Efectividad=0;
+        $Laboral=0;
+        $Personal=0;
+        $dato=array();
+        $c=0;
+        //$cont=ResponsablesModel::where('Id_Usuario','=','120')->count();
+          $res=ResponsablesModel::with('Tarea')-> where('Id_Usuario','=',$Id_Usuario)->get();
+          foreach ($res as $key => $value) {
+            
+             // dd($value['Tarea']['TipoTareas'][$key]['Descripcion']);
+            if($value['Tarea']['TipoTareas'][0]['Descripcion']=="Laboral" && $value['tarea']['Estado_Tarea']=='Pendiente'){
+                $Laboral=$Laboral+1;
+            }
+            if($value['Tarea']['TipoTareas'][0]['Descripcion']=='Personal' && $value['tarea']['Estado_Tarea']=='Pendiente'){
+                $Personal=$Personal+1;
+
+            }
+    
+            // foreach ($value['Tarea'] as $key2 => $valuetarea) {
+            //     dd($valuetarea);
+            // }
+            $totalRespo=$totalRespo+1;
+            if(($value['tarea']['Estado_Tarea'])=='Pendiente'){
+                $pendiente=$pendiente+1;
+            }
+            if(($value['tarea']['Estado_Tarea'])=='Terminada'){
+                $terminada=$terminada+1;
+            }
+            if(($value['tarea']['Estado_Tarea'])=='Vencida'){
+                $vencida=$vencida+1;
+            }
+
+            $Efectividad=($terminada/$totalRespo)*100;
+            $c=$c+1;
+          }
+           $dato['Total_Responsables']= ($totalRespo);
+           $dato['Total_Pendiente']= ($pendiente);
+           $dato['Total_Terminada']= ($terminada);
+           $dato['Total_Vencida']= ($vencida);
+           $dato['Efectividad']= ($Efectividad);
+            $dato['Laboral']= ($Laboral);
+             $dato['Personal']= ($Personal);
+
+
+           return $dato;
+       
+
     }
 }

@@ -3,22 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\ObservadoresModel;
-class ObservadoresController extends Controller
+use App\Reunio_Responsable_Model;
+
+class Reunio_Responsable_Controller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function __construct(ObservadoresModel $Observadores)
+    public function __construct(Reunio_Responsable_Model $Responsables)
     {
-        $this->Observadores=$Observadores;
+        $this->Responsables=$Responsables;
     }
 
-    public function index(ObservadoresModel $Observadores)
+    public function index(Reunio_Responsable_Model $Responsables)
     {
-        return $Observadores->get();
+        return $Responsables->get();
     }
 
     /**
@@ -42,7 +38,7 @@ class ObservadoresController extends Controller
     public function store(Request $request)
     {
       $input = $request->all();
-      return $this->Observadores->create($input);
+      return $this->Responsables->create($input);
     }
 
     /**
@@ -76,9 +72,7 @@ class ObservadoresController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $input = $request->all();
-      $this->Observadores->where('Id_Tarea', $id)->update($input);
-      return $this->Observadores->where('Id_Tarea', $id)->get();
+        //
     }
 
     /**
@@ -89,7 +83,6 @@ class ObservadoresController extends Controller
      */
     public function destroy($id)
     {
-         $this->Observadores->where('Id_Tarea', $id)->delete();
-
+       $this->Responsables->where('Id_Tarea', $id)->delete();
     }
 }

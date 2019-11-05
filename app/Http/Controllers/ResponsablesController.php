@@ -87,6 +87,6 @@ class ResponsablesController extends Controller
      */
     public function destroy($id)
     {
-        //
+       $this->Responsables->where('Id_Tarea', $id)->delete();
     }
 }

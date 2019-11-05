@@ -87,6 +87,6 @@ class ParticipantesController extends Controller
      */
     public function destroy($id)
     {
-        //
+           $this->Participantes->where('Id_Tarea', $id)->delete();
     }
 }

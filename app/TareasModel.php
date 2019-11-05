@@ -40,7 +40,7 @@ class TareasModel extends Model
     }
        public function SubTareas()
     {
-        return $this->hasMany('App\TareasModel', 'tareasIdTareas','Id_tarea')->with('Responsables','Participantes','Observadores','Usuario','SubTareas','Observacion');
+        return $this->hasMany('App\TareasModel', 'tareasIdTareas','Id_tarea')->with('Responsables','Participantes','Observadores','Usuario','SubTareas','Observacion','TipoTareas');
     }
 
     public function TipoTareas(){

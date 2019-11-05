@@ -79,7 +79,9 @@ class ObservacionController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+      $input = $request->all();
+      $this->Observacion->where('Id_Observacion', $id)->update($input);
+      return $this->Observacion->find($id);
     }
 
     /**
@@ -90,6 +92,6 @@ class ObservacionController extends Controller
      */
     public function destroy($id)
     {
-        //
+       
     }
 }

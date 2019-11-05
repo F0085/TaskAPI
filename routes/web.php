@@ -10,10 +10,10 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-// header('Access-Control-Allow-Origin: *');
-// header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
-// header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
-// header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
+header('Access-Control-Allow-Origin: *');
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
+header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 // $router->get('/', function () use ($router) {
 //     return $router->app->version();
 // });
@@ -87,18 +87,25 @@
 	//TAREAS POR TIPO DE TAREAS PERSONAL O LABORAL CON EL ESTADO DE PENDIENTE ETC
 	route::get('TareasPorTipo/{estado}/{tipo}/{idUsuario}','TareasController@TareasPorTipo');
 
+	route::get('TareasPorTipoPendiente/{estado}/{tipo}/{idUsuario}','TareasController@TareasPorTipoPendiente');
+	
+
 	//TRAER TAREAS PERSONALES
 	route::get('TareasPersonales/{idUsuario}','TareasController@TareasPersonales');
 
 	//PARA SABER SI TIENE TAREAS PENDIENTES
 	route::get('TareasPendientesPorTareas/{idtareas}/{idUsuario}','TareasController@TareasPendientesPorTareas');
+	route::get('tareasCPM/{estado}','TareasController@tareasCPM');
 
 
-
-	//PARA TRAER LAS OBSERVACIONES
+	//PARA TRAER LAS OBSERVACIONES DE TAREAS
 	route::resource('Observaciones', 'ObservacionController');
+	
+	//DOCUMENTOS
+	route::resource('Documento', 'DocumentoController');
 
-
+	//REUNION
+	route::resource('Reunion', 'ReunionController');
 
 	// //EXTRAE LAS AREAS DE LAS RELACIONES DE AREASROLES
 	// route::get('disntinArea', 'AreasRolesController@AreasRolesDistinct');
@@ -107,3 +114,29 @@
 	// route::get('UserRoles/{area}/{rol}', 'GestioUsuariosController@UsuarioRoles');
 
 
+	//REUNIONES
+	//CREADAS POR MI
+	route::get('ReunionPorEstado_User/{estado}/{idUsuario}', 'ReunionController@ReunionPorEstado_User');
+
+	route::get('MisReunionesResponsables/{idUsuario}', 'ReunionController@MisReunionesResponsables');
+	route::get('MisReunionesParticipantes/{idUsuario}', 'ReunionController@MisReunionesParticipantes');
+
+	route::resource('Reunio_Participante', 'Reunio_Participante_Controller');
+	route::resource('Reunio_Responsable', 'Reunio_Responsable_Controller');
+	route::PUT('ActualizarAsistencia/{Id_Usuario}/{IdReunion}', 'Reunio_Participante_Controller@ActualizarAsistencia');
+
+
+	//PARA TRAER LAS OBSERVACIONES DE REUNIONES
+	route::resource('ObservacionesReuniones', 'ObservacionReunionController');
+
+	
+
+	//ADMINISTRADOR
+	route::get('TareasAdministrador/{estado}', 'TareasController@TareasAdministrador');
+
+	route::get('TareasEstadoAdministrador/{estado}', 'TareasController@TareasEstadoAdministrador');
+
+	route::get('TotalTareasResponsables/{Id_Usuario}', 'TareasController@TotalTareasResponsables');
+	
+	
+	
