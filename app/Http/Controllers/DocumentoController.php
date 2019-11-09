@@ -59,7 +59,7 @@ class DocumentoController extends Controller
 
       public function DocPorUsuarios($id_Usuario)
     {
-        $respon = DocumentoModel::with('Usuario')->where('Id_Usuario','=',$id_Usuario)->get();
+        $respon = DocumentoModel::with('Usuario','Tarea')->where('Id_Usuario','=',$id_Usuario)->get();
                return $respon; 
     }
 
