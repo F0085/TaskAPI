@@ -11,7 +11,7 @@ class UsuarioRolesModel extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'Id_Usuario', 'Id_Roles','Id_Area'
+        'Id_Usuario', 'Id_Roles'
     ];
 
      public function Usuarios()
