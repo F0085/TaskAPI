@@ -57,6 +57,12 @@ class DocumentoController extends Controller
                return $respon; 
     }
 
+      public function DocPorUsuarios($id_Usuario)
+    {
+        $respon = DocumentoModel::with('Usuario')->where('Id_Usuario','=',$id_Usuario)->get();
+               return $respon; 
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

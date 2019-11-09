@@ -137,6 +137,11 @@ header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 	route::get('TareasEstadoAdministrador/{estado}', 'TareasController@TareasEstadoAdministrador');
 
 	route::get('TotalTareasResponsables/{Id_Usuario}', 'TareasController@TotalTareasResponsables');
+
+
+	//DOCUMENTOS POR USUARIOS
+	route::get('DocPorUsuarios/{Id_Usuario}', 'DocumentoController@DocPorUsuarios');
+	
 	
 	
 	
