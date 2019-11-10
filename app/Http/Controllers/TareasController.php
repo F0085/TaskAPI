@@ -25,10 +25,10 @@ class TareasController extends Controller
                return $respon;        
     }
 
-    public function tareasCPM($estado)
+    public function tareasCPM($estado,$idUsuario)
     {
 
-          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('Estado_Tarea','=',$estado)->get();
+          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('Estado_Tarea','=',$estado)->where('Id_Usuario','=',$idUsuario)->get();
                return $respon;        
     }
 
