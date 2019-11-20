@@ -142,6 +142,11 @@ header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 	//DOCUMENTOS POR USUARIOS
 	route::get('DocPorUsuarios/{Id_Usuario}', 'DocumentoController@DocPorUsuarios');
 	
+
+	route::get('TareasReporte/{estado}', 'TareasController@TareasReporte');
+
+	route::get('Reporteshow/{id}', 'TareasController@Reporteshow');
+	
 	
 	
 	

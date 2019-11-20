@@ -39,6 +39,12 @@ class TareasController extends Controller
           return $respon;
     }
 
+    public function TareasReporte($estado)
+    {
+          $respon = TareasModel::where('Estado_Tarea','=',$estado)->where('Id_Tipo_Tarea','=','5')->get();
+          return $respon;
+    }
+
     public function TareasAdministrador($estado)
     {
           $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('tip_tar','=','T')->where('Estado_Tarea','=',$estado)->orderBy('FechaFin', 'asc')->get();
@@ -129,6 +135,12 @@ class TareasController extends Controller
     public function show($id)
     {
           $respon = TareasModel::with('Usuario','Responsables','Participantes','Observadores','SubTareas','Observacion','Documento','TipoTareas')->where('Id_Tarea','=',$id)->get();
+               return $respon;  
+    }
+
+        public function Reporteshow($id)
+    {
+          $respon = TareasModel::with('Usuario','Responsables','Participantes','Observadores','ReporteSubTareas','Observacion','Documento','TipoTareas')->where('Id_Tarea','=',$id)->get();
                return $respon;  
     }
 
