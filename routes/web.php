@@ -162,7 +162,7 @@ header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 
 	route::get('TotalEstadisticaAdmin', 'TareasController@TotalEstadisticaAdmin');
 
-route::get('TotalEstadisticaUsuario/{Id_Usuario}', 'TareasController@TotalEstadisticaUsuario');
+    route::get('TotalEstadisticaUsuario/{Id_Usuario}', 'TareasController@TotalEstadisticaUsuario');
 	
 
 	
