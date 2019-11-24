@@ -18,6 +18,10 @@ class Reunio_Responsable_Model extends Model
     {
         return $this->belongsTo('App\ReunionModel', 'Id_Reunion', 'Id_Reunion')->with('Participantes','Usuario','Responsables');
     }
+    public function ContarReunion()
+    {
+        return $this->belongsTo('App\ReunionModel', 'Id_Reunion', 'Id_Reunion')->where('Estado','Pendiente')->with('Participantes','Usuario','Responsables');
+    }
 
     public function Usuario()
     {

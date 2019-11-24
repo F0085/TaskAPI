@@ -119,6 +119,6 @@ class ReunionController extends Controller
      */
     public function destroy($id)
     {
-        //
+       
     }
 }

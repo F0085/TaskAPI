@@ -43,9 +43,9 @@ class TareasModel extends Model
         return $this->hasMany('App\TareasModel', 'tareasIdTareas','Id_tarea')->with('Responsables','Participantes','Observadores','Usuario','SubTareas','Observacion','TipoTareas','Documento');
     }
 
-           public function ReporteSubTareas()
+    public function ReporteSubTareas()
     {
-        return $this->hasMany('App\TareasModel', 'tareasIdTareas','Id_tarea')->where('Estado_Tarea','Terminada')->with('Responsables','Participantes','Observadores','Usuario','ReporteSubTareas','Observacion','TipoTareas','Documento');
+        return $this->hasMany('App\TareasModel', 'tareasIdTareas','Id_tarea')->with('Responsables','Participantes','Observadores','Usuario','ReporteSubTareas','Observacion','TipoTareas','Documento');
     }
 
     public function TipoTareas(){

@@ -7,6 +7,9 @@ use App\TareasModel;
 use App\ResponsablesModel;
 use App\ParticipantesModel;
 use App\ObservadoresModel;
+use App\Reunio_Responsable_Model;
+use App\Reunio_Participante_Model;
+use App\ReunionModel;
 use DB;
 
 
@@ -188,12 +191,34 @@ class TareasController extends Controller
         $Efectividad=0;
         $Laboral=0;
         $Personal=0;
+        $pendienteP=0;
+        $terminadaP=0;
+        $vencidaP=0;
+        $totalRespoP=0;
+        $EfectividadP=0;
+        $reunionRespon=0;
+        $reunionparticipa=0;
         $dato=array();
         $c=0;
         //$cont=ResponsablesModel::where('Id_Usuario','=','120')->count();
-          $res=ResponsablesModel::with('Tarea')-> where('Id_Usuario','=',$Id_Usuario)->get();
+        $res=ResponsablesModel::with('Tarea')-> where('Id_Usuario','=',$Id_Usuario)->get();
+        $ReunionR=Reunio_Responsable_Model::with('ContarReunion')-> where('Id_Usuario','=',$Id_Usuario)->get();
+        foreach ($ReunionR as $key => $valueR) {
+            if($valueR['ContarReunion']['Estado']=='Pendiente'){
+              $reunionRespon=$reunionRespon+1;
+            }
+        }
+        $ReunionP=Reunio_Participante_Model::with('ContarReunion')-> where('Id_Usuario','=',$Id_Usuario)->get();
+        foreach ($ReunionP as $key => $valueP) {
+            if($valueP['ContarReunion']['Estado']=='Pendiente'){
+                 $reunionparticipa=$reunionparticipa+1;
+            }
+        }
+
           foreach ($res as $key => $value) {
+
             
+          
              // dd($value['Tarea']['TipoTareas'][$key]['Descripcion']);
             if($value['Tarea']['TipoTareas'][0]['Descripcion']=="Laboral" && $value['tarea']['Estado_Tarea']=='Pendiente'){
                 $Laboral=$Laboral+1;
@@ -203,34 +228,390 @@ class TareasController extends Controller
 
             }
     
-            // foreach ($value['Tarea'] as $key2 => $valuetarea) {
-            //     dd($valuetarea);
-            // }
-            $totalRespo=$totalRespo+1;
-            if(($value['tarea']['Estado_Tarea'])=='Pendiente'){
+            //TAREAS LABORALES
+            if(($value['tarea']['Id_Tipo_Tarea'] == '5')){
+                 $totalRespo=$totalRespo+1;
+            }
+            if(($value['tarea']['Estado_Tarea']=='Pendiente') && ($value['tarea']['Id_Tipo_Tarea'] == '5')){
                 $pendiente=$pendiente+1;
             }
-            if(($value['tarea']['Estado_Tarea'])=='Terminada'){
+            if(($value['tarea']['Estado_Tarea']=='Terminada') && ($value['tarea']['Id_Tipo_Tarea'] == '5')){
                 $terminada=$terminada+1;
             }
-            if(($value['tarea']['Estado_Tarea'])=='Vencida'){
+            if(($value['tarea']['Estado_Tarea'] =='Vencida') && ($value['tarea']['Id_Tipo_Tarea'] == '5')){
                 $vencida=$vencida+1;
             }
 
-            $Efectividad=($terminada/$totalRespo)*100;
+            //TAREAS PERSONALES
+            if(($value['tarea']['Id_Tipo_Tarea'] == '4')){
+                 $totalRespoP=$totalRespoP+1;
+            }
+            if(($value['tarea']['Estado_Tarea']=='Pendiente') && ($value['tarea']['Id_Tipo_Tarea'] == '4')){
+                $pendienteP=$pendienteP+1;
+            }
+            if(($value['tarea']['Estado_Tarea']=='Terminada') && ($value['tarea']['Id_Tipo_Tarea'] == '4')){
+                $terminadaP=$terminadaP+1;
+            }
+            if(($value['tarea']['Estado_Tarea'] =='Vencida') && ($value['tarea']['Id_Tipo_Tarea'] == '4')){
+                $vencidaP=$vencidaP+1;
+            }
+
+            
+            
             $c=$c+1;
           }
+           $Efectividad=round(($terminada/$totalRespo)*100,1);
+           $EfectividadP=round(($terminadaP/$totalRespoP)*100,1);
+           // $fechaactual=strtotime(date('Y-m-j'));
+           // $Mes=date("m",$fechaactual);
+           // $Anio=date("Y",$fechaactual);
            $dato['Total_Responsables']= ($totalRespo);
            $dato['Total_Pendiente']= ($pendiente);
            $dato['Total_Terminada']= ($terminada);
            $dato['Total_Vencida']= ($vencida);
            $dato['Efectividad']= ($Efectividad);
-            $dato['Laboral']= ($Laboral);
-             $dato['Personal']= ($Personal);
+           $dato['Laboral']= ($Laboral);
+           $dato['Personal']= ($Personal);
+           // $dato['MesActual']= ($Mes);
+           // $dato['AnioActual']= ($Anio);
+
+           //CALCULOS PARA PERSONALES
+           $dato['Total_ResponsablesP']= ($totalRespoP);
+           $dato['Total_PendienteP']= ($pendienteP);
+           $dato['Total_TerminadaP']= ($terminadaP);
+           $dato['Total_VencidaP']= ($vencidaP);
+           $dato['EfectividadP']= ($EfectividadP);
+           $dato['ReunionResponsable']= ($reunionRespon);
+           $dato['ReunionParticipante']= ($reunionparticipa);
 
 
            return $dato;
        
 
     }
+
+    public function TotalTareasResponsablesLaboral($Id_Usuario,$Anio,$Mes){
+        $pendiente=0;
+        $terminada=0;
+        $vencida=0;
+        $dato=array();
+        //$cont=ResponsablesModel::where('Id_Usuario','=','120')->count();
+          $res=ResponsablesModel::with('Tarea')-> where('Id_Usuario','=',$Id_Usuario)->get();
+
+        foreach ($res as $key => $value) {
+            $fechaComoEntero=strtotime($value['tarea']['FechaFin']);
+            $anio = date("Y", $fechaComoEntero);
+            $mes = date("m", $fechaComoEntero);
+            if($anio== $Anio && $mes ==$Mes){
+                if(($value['tarea']['Estado_Tarea']=='Pendiente') && ($value['tarea']['Id_Tipo_Tarea'] == '5')){
+                    $pendiente=$pendiente+1;
+                }
+                if(($value['tarea']['Estado_Tarea']=='Terminada') && ($value['tarea']['Id_Tipo_Tarea'] == '5')){
+                    $terminada=$terminada+1;
+                }
+                if(($value['tarea']['Estado_Tarea'] =='Vencida') && ($value['tarea']['Id_Tipo_Tarea'] == '5')){
+                    $vencida=$vencida+1;
+                }
+            }                
+        }
+        if($pendiente != 0 || $terminada!=0 || $vencida!= 0){
+           $dato['Total_Pendiente']= ($pendiente);
+           $dato['Total_Terminada']= ($terminada);
+           $dato['Total_Vencida']= ($vencida);
+           return $dato;
+        }else{
+            return 0;
+        }
+    }
+
+     public function TotalTareasResponsablesPersonal($Id_Usuario,$Anio,$Mes){
+        $pendiente=0;
+        $terminada=0;
+        $vencida=0;
+        $dato=array();
+        //$cont=ResponsablesModel::where('Id_Usuario','=','120')->count();
+          $res=ResponsablesModel::with('Tarea')-> where('Id_Usuario','=',$Id_Usuario)->get();
+
+        foreach ($res as $key => $value) {
+            $fechaComoEntero=strtotime($value['tarea']['FechaFin']);
+            $anio = date("Y", $fechaComoEntero);
+            $mes = date("m", $fechaComoEntero);
+            if($anio== $Anio && $mes ==$Mes){
+                if(($value['tarea']['Estado_Tarea']=='Pendiente') && ($value['tarea']['Id_Tipo_Tarea'] == '4')){
+                    $pendiente=$pendiente+1;
+                }
+                if(($value['tarea']['Estado_Tarea']=='Terminada') && ($value['tarea']['Id_Tipo_Tarea'] == '4')){
+                    $terminada=$terminada+1;
+                }
+                if(($value['tarea']['Estado_Tarea'] =='Vencida') && ($value['tarea']['Id_Tipo_Tarea'] == '4')){
+                    $vencida=$vencida+1;
+                }
+            }                
+        }
+        if($pendiente != 0 || $terminada!=0 || $vencida!= 0){
+           $dato['Total_Pendiente']= ($pendiente);
+           $dato['Total_Terminada']= ($terminada);
+           $dato['Total_Vencida']= ($vencida);
+           return $dato;
+        }else{
+            return 0;
+        }
+    }
+
+    public function EfectividadPorMeses($Id_Usuario,$Anio,$Mes){
+        $pendiente=0;
+        $terminada=0;
+        $vencida=0;
+        $totalRespo=0;
+        $Efectividad=0;
+        $dato=array();
+          $res=ResponsablesModel::with('Tarea')-> where('Id_Usuario','=',$Id_Usuario)->get();
+                 foreach ($res as $key => $value) {
+                    if($value['tarea']['FechaFin'] != null){
+                        $fechaComoEntero=strtotime($value['tarea']['FechaFin']);
+                        $anio = date("Y", $fechaComoEntero);
+                        $mes = date("m", $fechaComoEntero);
+                    
+
+                   
+                     // dd($value['Tarea']['TipoTareas'][$key]['Descripcion']);
+                        if($anio== $Anio && $mes ==$Mes){
+                            if(($value['tarea']['Id_Tipo_Tarea'] == '5')){
+                                 $totalRespo=$totalRespo+1;
+                            }
+                            if(($value['tarea']['Estado_Tarea']=='Pendiente') && ($value['tarea']['Id_Tipo_Tarea'] == '5')){
+                                $pendiente=$pendiente+1;
+                            }
+                            if(($value['tarea']['Estado_Tarea']=='Terminada') && ($value['tarea']['Id_Tipo_Tarea'] == '5')){
+                                $terminada=$terminada+1;
+                            }
+                            if(($value['tarea']['Estado_Tarea'] =='Vencida') && ($value['tarea']['Id_Tipo_Tarea'] == '5')){
+                                $vencida=$vencida+1;
+                            }
+                        }                
+                        
+                    }
+                }
+                if($totalRespo != 0 && $terminada!=0){
+                    $Efectividad=round(($terminada/$totalRespo)*100,1);
+                    $dato['Efectividad']= ($Efectividad); 
+                    return $dato;
+                }else{
+                    return 0;
+                }
+
+    }
+
+    public function EfectividadPorMesesPersonales($Id_Usuario,$Anio,$Mes){
+        $pendiente=0;
+        $terminada=0;
+        $vencida=0;
+        $totalRespo=0;
+        $Efectividad=0;
+        $dato=array();
+          $res=ResponsablesModel::with('Tarea')-> where('Id_Usuario','=',$Id_Usuario)->get();
+                 foreach ($res as $key => $value) {
+                    if($value['tarea']['FechaFin'] != null){
+                        $fechaComoEntero=strtotime($value['tarea']['FechaFin']);
+                        $anio = date("Y", $fechaComoEntero);
+                        $mes = date("m", $fechaComoEntero);
+                    
+
+                   
+                     // dd($value['Tarea']['TipoTareas'][$key]['Descripcion']);
+                        if($anio== $Anio && $mes ==$Mes){
+                            if(($value['tarea']['Id_Tipo_Tarea'] == '4')){
+                                 $totalRespo=$totalRespo+1;
+                            }
+                            if(($value['tarea']['Estado_Tarea']=='Pendiente') && ($value['tarea']['Id_Tipo_Tarea'] == '4')){
+                                $pendiente=$pendiente+1;
+                            }
+                            if(($value['tarea']['Estado_Tarea']=='Terminada') && ($value['tarea']['Id_Tipo_Tarea'] == '4')){
+                                $terminada=$terminada+1;
+                            }
+                            if(($value['tarea']['Estado_Tarea'] =='Vencida') && ($value['tarea']['Id_Tipo_Tarea'] == '4')){
+                                $vencida=$vencida+1;
+                            }
+                        }               
+                        
+                    }
+                }
+                if($totalRespo != 0 && $terminada!=0){
+                    $Efectividad=round(($terminada/$totalRespo)*100,1);
+                    $dato['Efectividad']= ($Efectividad); 
+                    return $dato;
+                }else{
+                    return 0;
+                }
+
+    }
+
+
+    public function TotalTareasAdmin(){
+
+        $Laboral=0;
+        $Personal=0;
+        $dato=array();
+        $res=TareasModel::with('TipoTareas')->where('Estado_Tarea','=','Pendiente')->get();
+        $resReunion=ReunionModel::where('Estado','=','Pendiente')->count();
+        foreach ($res as $key => $value) {
+            if($value['TipoTareas'][0]['Descripcion']=="Laboral"){
+                $Laboral=$Laboral+1;
+            }
+            if($value['TipoTareas'][0]['Descripcion']=='Personal'){
+                $Personal=$Personal+1;
+            }
+        }
+       $dato['Laboral']= ($Laboral);
+       $dato['Personal']= ($Personal);
+       $dato['ReunionPendientes']= ($resReunion);
+       return $dato;
+    }
+
+
+     public function TotalEstadisticaAdmin(){
+        $pendiente=0;
+        $terminada=0;
+        $vencida=0;
+        $totalRespo=0;
+        $Efectividad=0;
+        $pendienteP=0;
+        $terminadaP=0;
+        $vencidaP=0;
+        $totalRespoP=0;
+        $EfectividadP=0;
+        $dato=array();
+        $c=0;
+        //$cont=ResponsablesModel::where('Id_Usuario','=','120')->count();
+        $res=TareasModel::with('TipoTareas')->get();
+          foreach ($res as $key => $value) {    
+            //TAREAS LABORALES
+            if($value['TipoTareas'][0]['Descripcion']=="Laboral"){
+                 $totalRespo=$totalRespo+1;
+            }
+            if($value['Estado_Tarea']=='Pendiente' && $value['TipoTareas'][0]['Descripcion']=="Laboral"){
+                $pendiente=$pendiente+1;
+            }
+            if($value['Estado_Tarea']=='Terminada' && $value['TipoTareas'][0]['Descripcion']=="Laboral"){
+                $terminada=$terminada+1;
+            }
+            if($value['Estado_Tarea'] =='Vencida' && $value['TipoTareas'][0]['Descripcion']=="Laboral"){
+                $vencida=$vencida+1;
+            }
+
+            //TAREAS PERSONALES
+            if($value['TipoTareas'][0]['Descripcion']=="Personal"){
+                 $totalRespoP=$totalRespoP+1;
+            }
+            if(($value['Estado_Tarea']=='Pendiente') && $value['TipoTareas'][0]['Descripcion']=="Personal"){
+                $pendienteP=$pendienteP+1;
+            }
+            if(($value['Estado_Tarea']=='Terminada') && $value['TipoTareas'][0]['Descripcion']=="Personal"){
+                $terminadaP=$terminadaP+1;
+            }
+            if(($value['Estado_Tarea'] =='Vencida') && $value['TipoTareas'][0]['Descripcion']=="Personal"){
+                $vencidaP=$vencidaP+1;
+            }
+
+            
+            
+            $c=$c+1;
+          }
+           $Efectividad=round(($terminada/$totalRespo)*100,1);
+           $EfectividadP=round(($terminadaP/$totalRespoP)*100,1);
+           // $fechaactual=strtotime(date('Y-m-j'));
+           // $Mes=date("m",$fechaactual);
+           // $Anio=date("Y",$fechaactual);
+           $dato['Total_Responsables']= ($totalRespo);
+           $dato['Total_Pendiente']= ($pendiente);
+           $dato['Total_Terminada']= ($terminada);
+           $dato['Total_Vencida']= ($vencida);
+           $dato['Efectividad']= ($Efectividad);
+           //CALCULOS PARA PERSONALES
+           $dato['Total_ResponsablesP']= ($totalRespoP);
+           $dato['Total_PendienteP']= ($pendienteP);
+           $dato['Total_TerminadaP']= ($terminadaP);
+           $dato['Total_VencidaP']= ($vencidaP);
+           $dato['EfectividadP']= ($EfectividadP);
+
+
+           return $dato;
+       
+
+    }
+
+
+    public function TotalEstadisticaUsuario($Id_Usuario){
+        $pendiente=0;
+        $terminada=0;
+        $vencida=0;
+        $totalRespo=0;
+        $Efectividad=0;
+        $pendienteP=0;
+        $terminadaP=0;
+        $vencidaP=0;
+        $totalRespoP=0;
+        $EfectividadP=0;
+        $dato=array();
+        //$cont=ResponsablesModel::where('Id_Usuario','=','120')->count();
+          $res=ResponsablesModel::with('Tarea')-> where('Id_Usuario','=',$Id_Usuario)->get();
+
+         foreach ($res as $key => $value) { 
+
+            //TAREAS LABORALES
+            if($value['tarea']['TipoTareas'][0]['Descripcion']=="Laboral"){
+                 $totalRespo=$totalRespo+1;
+            }
+            if($value['tarea']['Estado_Tarea']=='Pendiente' && $value['tarea']['TipoTareas'][0]['Descripcion']=="Laboral"){
+                $pendiente=$pendiente+1;
+            }
+            if($value['tarea']['Estado_Tarea']=='Terminada' && $value['tarea']['TipoTareas'][0]['Descripcion']=="Laboral"){
+                $terminada=$terminada+1;
+            }
+            if($value['tarea']['Estado_Tarea'] =='Vencida' && $value['tarea']['TipoTareas'][0]['Descripcion']=="Laboral"){
+                $vencida=$vencida+1;
+            }
+
+            //TAREAS PERSONALES
+            if($value['tarea']['TipoTareas'][0]['Descripcion']=="Personal"){
+
+                 $totalRespoP=$totalRespoP+1;
+            }
+           
+            if(($value['tarea']['Estado_Tarea']=='Pendiente') && $value['tarea']['TipoTareas'][0]['Descripcion']=="Personal"){
+                $pendienteP=$pendienteP+1;
+            }
+            if(($value['tarea']['Estado_Tarea']=='Terminada') && $value['tarea']['TipoTareas'][0]['Descripcion']=="Personal"){
+                 
+                $terminadaP=$terminadaP+1;
+            }
+            if(($value['tarea']['Estado_Tarea'] =='Vencida') && $value['tarea']['TipoTareas'][0]['Descripcion']=="Personal"){
+                $vencidaP=$vencidaP+1;
+            }
+
+
+        }
+     
+           $Efectividad=round(($terminada/$totalRespo)*100,1);
+           $EfectividadP=round(($terminadaP/$totalRespoP)*100,1);
+           // $fechaactual=strtotime(date('Y-m-j'));
+           // $Mes=date("m",$fechaactual);
+           // $Anio=date("Y",$fechaactual);
+           $dato['Total_Responsables']= ($totalRespo);
+           $dato['Total_Pendiente']= ($pendiente);
+           $dato['Total_Terminada']= ($terminada);
+           $dato['Total_Vencida']= ($vencida);
+           $dato['Efectividad']= ($Efectividad);
+           //CALCULOS PARA PERSONALES
+           $dato['Total_ResponsablesP']= ($totalRespoP);
+           $dato['Total_PendienteP']= ($pendienteP);
+           $dato['Total_TerminadaP']= ($terminadaP);
+           $dato['Total_VencidaP']= ($vencidaP);
+           $dato['EfectividadP']= ($EfectividadP);
+           return $dato;
+   
+    }
+
+
+
 }

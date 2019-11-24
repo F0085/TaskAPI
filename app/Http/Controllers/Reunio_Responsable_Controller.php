@@ -83,6 +83,6 @@ class Reunio_Responsable_Controller extends Controller
      */
     public function destroy($id)
     {
-       $this->Responsables->where('Id_Tarea', $id)->delete();
+       $this->Responsables->where('Id_Reunion', $id)->delete();
     }
 }

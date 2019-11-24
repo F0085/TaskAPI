@@ -146,7 +146,23 @@ header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 	route::get('TareasReporte/{estado}', 'TareasController@TareasReporte');
 
 	route::get('Reporteshow/{id}', 'TareasController@Reporteshow');
+
+
+	route::get('EfectividadPorMeses/{Id_Usuario}/{Anio}/{Mes}', 'TareasController@EfectividadPorMeses');
+
+	route::get('EfectividadPorMesesPersonales/{Id_Usuario}/{Anio}/{Mes}', 'TareasController@EfectividadPorMesesPersonales');
+
 	
+	route::get('TotalTareasResponsablesLaboral/{Id_Usuario}/{Anio}/{Mes}', 'TareasController@TotalTareasResponsablesLaboral');
+
+	route::get('TotalTareasResponsablesPersonal/{Id_Usuario}/{Anio}/{Mes}', 'TareasController@TotalTareasResponsablesPersonal');
+
+
+	route::get('TotalTareasAdmin', 'TareasController@TotalTareasAdmin');
+
+	route::get('TotalEstadisticaAdmin', 'TareasController@TotalEstadisticaAdmin');
+
+route::get('TotalEstadisticaUsuario/{Id_Usuario}', 'TareasController@TotalEstadisticaUsuario');
 	
-	
+
 	

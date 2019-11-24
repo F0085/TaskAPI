@@ -96,6 +96,6 @@ class Reunio_Participante_Controller extends Controller
      */
     public function destroy($id)
     {
-           $this->Participantes->where('Id_Tarea', $id)->delete();
+           $this->Participantes->where('Id_Reunion', $id)->delete();
     }
 }
