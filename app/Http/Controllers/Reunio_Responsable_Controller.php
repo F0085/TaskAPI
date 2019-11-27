@@ -41,8 +41,15 @@ class Reunio_Responsable_Controller extends Controller
       return $this->Responsables->create($input);
     }
 
+    public function ActualizarAsistencia(Request $request, $Id_Usuario,$IdReunion)
+    {
+      $input = $request->all();
+      $this->Responsables->where('Id_Usuario', $Id_Usuario)->where('Id_Reunion',$IdReunion)->update($input);
+      // return $this->Tareas ->find($id);
+    }
+
     /**
-     * Display the specified resource.
+     * Display the specified resource.s
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

@@ -124,7 +124,7 @@ header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 	route::resource('Reunio_Participante', 'Reunio_Participante_Controller');
 	route::resource('Reunio_Responsable', 'Reunio_Responsable_Controller');
 	route::PUT('ActualizarAsistencia/{Id_Usuario}/{IdReunion}', 'Reunio_Participante_Controller@ActualizarAsistencia');
-
+	route::PUT('ActualizarAsistenciaResponsable/{Id_Usuario}/{IdReunion}', 'Reunio_Participante_Controller@ActualizarAsistencia');
 
 	//PARA TRAER LAS OBSERVACIONES DE REUNIONES
 	route::resource('ObservacionesReuniones', 'ObservacionReunionController');

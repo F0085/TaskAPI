@@ -554,7 +554,7 @@ class TareasController extends Controller
         $EfectividadP=0;
         $dato=array();
         //$cont=ResponsablesModel::where('Id_Usuario','=','120')->count();
-          $res=ResponsablesModel::with('Tarea')-> where('Id_Usuario','=',$Id_Usuario)->get();
+        $res=ResponsablesModel::with('Tarea')-> where('Id_Usuario','=',$Id_Usuario)->get();
 
          foreach ($res as $key => $value) { 
 
