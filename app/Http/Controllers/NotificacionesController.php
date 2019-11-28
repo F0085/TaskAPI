@@ -36,4 +36,11 @@ class NotificacionesController extends Controller
          return $this->Notificaciones->create($input);
 
     }
+
+    public function update(Request $request, $id)
+    {
+      $input = $request->all();
+      $this->Notificaciones->where('Id_notificaciones', $id)->update($input);
+      return $this->Notificaciones->find($id);
+    }
 }
