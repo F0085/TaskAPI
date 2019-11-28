@@ -522,8 +522,14 @@ class TareasController extends Controller
             
             $c=$c+1;
           }
-           $Efectividad=round(($terminada/$totalRespo)*100,1);
-           $EfectividadP=round(($terminadaP/$totalRespoP)*100,1);
+          if($terminada!=0){
+            $Efectividad=round(($terminada/$totalRespo)*100,1);
+             $EfectividadP=round(($terminadaP/$totalRespoP)*100,1);
+          }else{
+            $EfectividadP=0;
+            $Efectividad=0;
+          }
+ 
            // $fechaactual=strtotime(date('Y-m-j'));
            // $Mes=date("m",$fechaactual);
            // $Anio=date("Y",$fechaactual);
@@ -596,9 +602,15 @@ class TareasController extends Controller
 
 
         }
+         if($terminada!=0){
+            $Efectividad=round(($terminada/$totalRespo)*100,1);
+             $EfectividadP=round(($terminadaP/$totalRespoP)*100,1);
+          }else{
+            $EfectividadP=0;
+            $Efectividad=0;
+          }
      
-           $Efectividad=round(($terminada/$totalRespo)*100,1);
-           $EfectividadP=round(($terminadaP/$totalRespoP)*100,1);
+
            // $fechaactual=strtotime(date('Y-m-j'));
            // $Mes=date("m",$fechaactual);
            // $Anio=date("Y",$fechaactual);
