@@ -146,6 +146,8 @@ header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 	route::get('TareasReporte/{estado}', 'TareasController@TareasReporte');
 
 	route::get('Reporteshow/{id}', 'TareasController@Reporteshow');
+	route::get('ReporteReunionshow/{id}', 'ReunionController@ReporteReunionshow');
+	
 
 
 	route::get('EfectividadPorMeses/{Id_Usuario}/{Anio}/{Mes}', 'TareasController@EfectividadPorMeses');

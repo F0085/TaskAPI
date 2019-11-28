@@ -32,7 +32,9 @@ class ReunionModel extends Model
 
     public function Observacion()
     {
-        return $this->hasMany('App\ObservacionReunionModel', 'Id_Reunion', 'Id_Reunion')->with('Usuario');
+        return $this->hasMany('App\ObservacionReunionModel', 'Id_Reunion', 'Id_Reunion')->with('Usuario','SubObservaciones');
+
+        
     }
 
 }

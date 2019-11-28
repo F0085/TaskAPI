@@ -111,6 +111,12 @@ class ReunionController extends Controller
       return $this->Reunion ->find($id);
     }
 
+    public function ReporteReunionshow($id)
+    {
+          $respon = ReunionModel::with('Usuario','Responsables','Participantes','Observacion')->where('Id_Reunion','=',$id)->get();
+               return $respon;  
+    }
+
     /**
      * Remove the specified resource from storage.
      *
