@@ -50,6 +50,7 @@ class UsuariosController extends Controller
                  'roles.Descripcion as Rol',
                  'roles.Id_Roles as Id_Roles')
         
+        
         ->orderBy('usuarios.Id_Usuario', 'asc')
         ->get();
         return Response()->json($usuarios);
