@@ -260,8 +260,13 @@ class TareasController extends Controller
             
             $c=$c+1;
           }
+          if($terminada!=0){
            $Efectividad=round(($terminada/$totalRespo)*100,1);
            $EfectividadP=round(($terminadaP/$totalRespoP)*100,1);
+          }else{
+            $Efectividad=0;
+            $EfectividadP=0;
+          }
            // $fechaactual=strtotime(date('Y-m-j'));
            // $Mes=date("m",$fechaactual);
            // $Anio=date("Y",$fechaactual);

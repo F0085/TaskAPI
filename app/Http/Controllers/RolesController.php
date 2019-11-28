@@ -148,6 +148,7 @@ class RolesController extends Controller
     public function destroy($id)
     {
         $roles = $this->roles->destroy($id);
+        return $roles;
       // return ['message' => 'deleted successfully', 'roles_id' => $roles];
     }
 }

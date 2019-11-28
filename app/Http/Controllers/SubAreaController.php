@@ -103,6 +103,7 @@ class SubAreaController extends Controller
      */
     public function destroy($id)
     {
-         $SubArea = $this->SubArea->destroy($id);
+         $this->SubArea->destroy($id);
+          
     }
 }
