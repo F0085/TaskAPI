@@ -260,13 +260,22 @@ class TareasController extends Controller
             
             $c=$c+1;
           }
-          if($terminada!=0){
+          if($terminada!=0 && $totalRespo!=0){
            $Efectividad=round(($terminada/$totalRespo)*100,1);
-           $EfectividadP=round(($terminadaP/$totalRespoP)*100,1);
+     
           }else{
             $Efectividad=0;
-            $EfectividadP=0;
+            
           }
+            if($terminadaP!=0 && $totalRespoP != 0){
+           $EfectividadP=round(($terminadaP/$totalRespoP)*100,1);
+     
+          }else{
+            $EfectividadP=0;
+            
+          }
+
+
            // $fechaactual=strtotime(date('Y-m-j'));
            // $Mes=date("m",$fechaactual);
            // $Anio=date("Y",$fechaactual);
@@ -522,12 +531,19 @@ class TareasController extends Controller
             
             $c=$c+1;
           }
-          if($terminada!=0){
-            $Efectividad=round(($terminada/$totalRespo)*100,1);
-             $EfectividadP=round(($terminadaP/$totalRespoP)*100,1);
+          if($terminada!=0 && $totalRespo !=0){
+           $Efectividad=round(($terminada/$totalRespo)*100,1);
+     
+          }else{
+            $Efectividad=0;
+            
+          }
+            if($terminadaP !=0 && $totalRespoP != 0){
+           $EfectividadP=round(($terminadaP/$totalRespoP)*100,1);
+     
           }else{
             $EfectividadP=0;
-            $Efectividad=0;
+            
           }
  
            // $fechaactual=strtotime(date('Y-m-j'));
@@ -602,14 +618,20 @@ class TareasController extends Controller
 
 
         }
-         if($terminada!=0){
-            $Efectividad=round(($terminada/$totalRespo)*100,1);
-             $EfectividadP=round(($terminadaP/$totalRespoP)*100,1);
+          if($terminada!=0 && $totalRespo!=0){
+           $Efectividad=round(($terminada/$totalRespo)*100,1);
+     
+          }else{
+            $Efectividad=0;
+            
+          }
+            if($terminadaP!=0 && $totalRespoP != 0){
+           $EfectividadP=round(($terminadaP/$totalRespoP)*100,1);
+     
           }else{
             $EfectividadP=0;
-            $Efectividad=0;
+            
           }
-     
 
            // $fechaactual=strtotime(date('Y-m-j'));
            // $Mes=date("m",$fechaactual);
