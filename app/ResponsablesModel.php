@@ -18,6 +18,11 @@ class ResponsablesModel extends Model
     {
         return $this->belongsTo('App\TareasModel', 'Id_Tarea', 'Id_tarea')->with('Observadores','Participantes','Usuario','Responsables','TipoTareas');
     }
+    //SOLO NECESITO LOS DATOS DE LA TAREA NADA MAS
+    public function TareaResponsable()
+    {
+        return $this->belongsTo('App\TareasModel', 'Id_Tarea', 'Id_tarea')->with('TipoTareas');
+    }
 
 
     public function Usuario()

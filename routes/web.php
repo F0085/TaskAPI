@@ -163,13 +163,14 @@ header('Access-Control-Allow-Headers: Content-Type, x-xsrf-token');
 	route::get('TotalTareasAdmin', 'TareasController@TotalTareasAdmin');
 
 	route::get('TotalEstadisticaAdmin', 'TareasController@TotalEstadisticaAdmin');
-
+	route::get('MejoresEfectividad', 'TareasController@MejoresEfectividad');
     route::get('TotalEstadisticaUsuario/{Id_Usuario}', 'TareasController@TotalEstadisticaUsuario');
-
-
  	route::resource('Notificaciones', 'NotificacionesController');
  	route::get('ContarNotificacionWeb/{Id_usuario}', 'NotificacionesController@ContarNotificacionWeb');
  	route::get('ContarNotificacionMovil/{Id_usuario}', 'NotificacionesController@ContarNotificacionMovil');
+	route::get('ReunionAdmin/{estado}', 'ReunionController@ReunionAdmin');
+
+ 	
  	
     
 	

@@ -10,6 +10,7 @@ use App\ObservadoresModel;
 use App\Reunio_Responsable_Model;
 use App\Reunio_Participante_Model;
 use App\ReunionModel;
+use App\User;
 use DB;
 
 
@@ -235,10 +236,10 @@ class TareasController extends Controller
             if(($value['tarea']['Estado_Tarea']=='Pendiente') && ($value['tarea']['Id_Tipo_Tarea'] == '5')){
                 $pendiente=$pendiente+1;
             }
-            if(($value['tarea']['Estado_Tarea']=='Terminada') && ($value['tarea']['Id_Tipo_Tarea'] == '5')){
+            if(($value['tarea']['Estado_Tarea']=='Terminada' && $value['tarea']['estadoVencida'] =='false') && ($value['tarea']['Id_Tipo_Tarea'] == '5')){
                 $terminada=$terminada+1;
             }
-            if(($value['tarea']['Estado_Tarea'] =='Vencida') && ($value['tarea']['Id_Tipo_Tarea'] == '5')){
+            if(($value['tarea']['estadoVencida'] =='true') && ($value['tarea']['Id_Tipo_Tarea'] == '5')){
                 $vencida=$vencida+1;
             }
 
@@ -249,10 +250,10 @@ class TareasController extends Controller
             if(($value['tarea']['Estado_Tarea']=='Pendiente') && ($value['tarea']['Id_Tipo_Tarea'] == '4')){
                 $pendienteP=$pendienteP+1;
             }
-            if(($value['tarea']['Estado_Tarea']=='Terminada') && ($value['tarea']['Id_Tipo_Tarea'] == '4')){
+            if(($value['tarea']['Estado_Tarea']=='Terminada' && $value['tarea']['estadoVencida'] =='false') && ($value['tarea']['Id_Tipo_Tarea'] == '4')){
                 $terminadaP=$terminadaP+1;
             }
-            if(($value['tarea']['Estado_Tarea'] =='Vencida') && ($value['tarea']['Id_Tipo_Tarea'] == '4')){
+            if(($value['tarea']['estadoVencida'] =='true') && ($value['tarea']['Id_Tipo_Tarea'] == '4')){
                 $vencidaP=$vencidaP+1;
             }
 
@@ -320,10 +321,10 @@ class TareasController extends Controller
                 if(($value['tarea']['Estado_Tarea']=='Pendiente') && ($value['tarea']['Id_Tipo_Tarea'] == '5')){
                     $pendiente=$pendiente+1;
                 }
-                if(($value['tarea']['Estado_Tarea']=='Terminada') && ($value['tarea']['Id_Tipo_Tarea'] == '5')){
+                if(($value['tarea']['Estado_Tarea']=='Terminada' && $value['tarea']['estadoVencida'] =='false') && ($value['tarea']['Id_Tipo_Tarea'] == '5')){
                     $terminada=$terminada+1;
                 }
-                if(($value['tarea']['Estado_Tarea'] =='Vencida') && ($value['tarea']['Id_Tipo_Tarea'] == '5')){
+                if(($value['tarea']['estadoVencida'] =='true') && ($value['tarea']['Id_Tipo_Tarea'] == '5')){
                     $vencida=$vencida+1;
                 }
             }                
@@ -354,10 +355,10 @@ class TareasController extends Controller
                 if(($value['tarea']['Estado_Tarea']=='Pendiente') && ($value['tarea']['Id_Tipo_Tarea'] == '4')){
                     $pendiente=$pendiente+1;
                 }
-                if(($value['tarea']['Estado_Tarea']=='Terminada') && ($value['tarea']['Id_Tipo_Tarea'] == '4')){
+                if(($value['tarea']['Estado_Tarea']=='Terminada' && $value['tarea']['estadoVencida'] =='false') && ($value['tarea']['Id_Tipo_Tarea'] == '4')){
                     $terminada=$terminada+1;
                 }
-                if(($value['tarea']['Estado_Tarea'] =='Vencida') && ($value['tarea']['Id_Tipo_Tarea'] == '4')){
+                if(($value['tarea']['estadoVencida'] =='true') && ($value['tarea']['Id_Tipo_Tarea'] == '4')){
                     $vencida=$vencida+1;
                 }
             }                
@@ -396,10 +397,10 @@ class TareasController extends Controller
                             if(($value['tarea']['Estado_Tarea']=='Pendiente') && ($value['tarea']['Id_Tipo_Tarea'] == '5')){
                                 $pendiente=$pendiente+1;
                             }
-                            if(($value['tarea']['Estado_Tarea']=='Terminada') && ($value['tarea']['Id_Tipo_Tarea'] == '5')){
+                            if(($value['tarea']['Estado_Tarea']=='Terminada' && $value['tarea']['estadoVencida'] =='false') && ($value['tarea']['Id_Tipo_Tarea'] == '5')){
                                 $terminada=$terminada+1;
                             }
-                            if(($value['tarea']['Estado_Tarea'] =='Vencida') && ($value['tarea']['Id_Tipo_Tarea'] == '5')){
+                            if(($value['tarea']['estadoVencida'] =='true') && ($value['tarea']['Id_Tipo_Tarea'] == '5')){
                                 $vencida=$vencida+1;
                             }
                         }                
@@ -440,10 +441,10 @@ class TareasController extends Controller
                             if(($value['tarea']['Estado_Tarea']=='Pendiente') && ($value['tarea']['Id_Tipo_Tarea'] == '4')){
                                 $pendiente=$pendiente+1;
                             }
-                            if(($value['tarea']['Estado_Tarea']=='Terminada') && ($value['tarea']['Id_Tipo_Tarea'] == '4')){
+                            if(($value['tarea']['Estado_Tarea']=='Terminada' && $value['tarea']['estadoVencida'] =='false') && ($value['tarea']['Id_Tipo_Tarea'] == '4')){
                                 $terminada=$terminada+1;
                             }
-                            if(($value['tarea']['Estado_Tarea'] =='Vencida') && ($value['tarea']['Id_Tipo_Tarea'] == '4')){
+                            if(($value['tarea']['estadoVencida'] =='true') && ($value['tarea']['Id_Tipo_Tarea'] == '4')){
                                 $vencida=$vencida+1;
                             }
                         }               
@@ -495,9 +496,10 @@ class TareasController extends Controller
         $totalRespoP=0;
         $EfectividadP=0;
         $dato=array();
+        $MejoresEfectividad=array();
         $c=0;
         //$cont=ResponsablesModel::where('Id_Usuario','=','120')->count();
-        $res=TareasModel::with('TipoTareas')->get();
+        $res=TareasModel::with('TipoTareas','Responsables')->get();
           foreach ($res as $key => $value) {    
             //TAREAS LABORALES
             if($value['TipoTareas'][0]['Descripcion']=="Laboral"){
@@ -506,10 +508,10 @@ class TareasController extends Controller
             if($value['Estado_Tarea']=='Pendiente' && $value['TipoTareas'][0]['Descripcion']=="Laboral"){
                 $pendiente=$pendiente+1;
             }
-            if($value['Estado_Tarea']=='Terminada' && $value['TipoTareas'][0]['Descripcion']=="Laboral"){
+            if($value['Estado_Tarea']=='Terminada' && $value['estadoVencida'] =='false' && $value['TipoTareas'][0]['Descripcion']=="Laboral"){
                 $terminada=$terminada+1;
             }
-            if($value['Estado_Tarea'] =='Vencida' && $value['TipoTareas'][0]['Descripcion']=="Laboral"){
+            if($value['estadoVencida'] =='true' && $value['TipoTareas'][0]['Descripcion']=="Laboral"){
                 $vencida=$vencida+1;
             }
 
@@ -520,10 +522,10 @@ class TareasController extends Controller
             if(($value['Estado_Tarea']=='Pendiente') && $value['TipoTareas'][0]['Descripcion']=="Personal"){
                 $pendienteP=$pendienteP+1;
             }
-            if(($value['Estado_Tarea']=='Terminada') && $value['TipoTareas'][0]['Descripcion']=="Personal"){
+            if(($value['Estado_Tarea']=='Terminada' && ['estadoVencida'] =='false' && $value['tarea']['estadoVencida'] =='false') && $value['TipoTareas'][0]['Descripcion']=="Personal"){
                 $terminadaP=$terminadaP+1;
             }
-            if(($value['Estado_Tarea'] =='Vencida') && $value['TipoTareas'][0]['Descripcion']=="Personal"){
+            if(($value['estadoVencida'] =='true') && $value['TipoTareas'][0]['Descripcion']=="Personal"){
                 $vencidaP=$vencidaP+1;
             }
 
@@ -545,15 +547,12 @@ class TareasController extends Controller
             $EfectividadP=0;
             
           }
- 
-           // $fechaactual=strtotime(date('Y-m-j'));
-           // $Mes=date("m",$fechaactual);
-           // $Anio=date("Y",$fechaactual);
            $dato['Total_Responsables']= ($totalRespo);
            $dato['Total_Pendiente']= ($pendiente);
            $dato['Total_Terminada']= ($terminada);
            $dato['Total_Vencida']= ($vencida);
            $dato['Efectividad']= ($Efectividad);
+       
            //CALCULOS PARA PERSONALES
            $dato['Total_ResponsablesP']= ($totalRespoP);
            $dato['Total_PendienteP']= ($pendienteP);
@@ -592,10 +591,10 @@ class TareasController extends Controller
             if($value['tarea']['Estado_Tarea']=='Pendiente' && $value['tarea']['TipoTareas'][0]['Descripcion']=="Laboral"){
                 $pendiente=$pendiente+1;
             }
-            if($value['tarea']['Estado_Tarea']=='Terminada' && $value['tarea']['TipoTareas'][0]['Descripcion']=="Laboral"){
+            if($value['tarea']['Estado_Tarea']=='Terminada' && $value['tarea']['estadoVencida'] =='false' && $value['tarea']['TipoTareas'][0]['Descripcion']=="Laboral"){
                 $terminada=$terminada+1;
             }
-            if($value['tarea']['Estado_Tarea'] =='Vencida' && $value['tarea']['TipoTareas'][0]['Descripcion']=="Laboral"){
+            if($value['tarea']['estadoVencida'] =='true' && $value['tarea']['TipoTareas'][0]['Descripcion']=="Laboral"){
                 $vencida=$vencida+1;
             }
 
@@ -608,11 +607,11 @@ class TareasController extends Controller
             if(($value['tarea']['Estado_Tarea']=='Pendiente') && $value['tarea']['TipoTareas'][0]['Descripcion']=="Personal"){
                 $pendienteP=$pendienteP+1;
             }
-            if(($value['tarea']['Estado_Tarea']=='Terminada') && $value['tarea']['TipoTareas'][0]['Descripcion']=="Personal"){
+            if(($value['tarea']['Estado_Tarea']=='Terminada' && $value['tarea']['estadoVencida'] =='false') && $value['tarea']['TipoTareas'][0]['Descripcion']=="Personal"){
                  
                 $terminadaP=$terminadaP+1;
             }
-            if(($value['tarea']['Estado_Tarea'] =='Vencida') && $value['tarea']['TipoTareas'][0]['Descripcion']=="Personal"){
+            if(($value['tarea']['estadoVencida'] =='true') && $value['tarea']['TipoTareas'][0]['Descripcion']=="Personal"){
                 $vencidaP=$vencidaP+1;
             }
 
@@ -650,6 +649,82 @@ class TareasController extends Controller
            return $dato;
    
     }
+
+       public function MejoresEfectividad(){
+        $pendiente=0;
+        $terminada=0;
+        $vencida=0;
+        $totalRespo=0;
+        $Efectividad=0;
+        $dato=array();
+        $temp=array();
+        $aux=0;
+        //$cont=ResponsablesModel::where('Id_Usuario','=','120')->count();
+        $res=User::with('ResponsablesTareas')->get();
+       
+          
+         foreach ($res as $key1 => $tareas) { 
+          foreach ($tareas['ResponsablesTareas'] as $key => $value) {
+             if($value['TareaResponsable']['TipoTareas'][0]['Descripcion']=="Laboral"){
+                   $totalRespo=$totalRespo+1;
+              }
+              // if($value['TareaResponsable']['Estado_Tarea']=='Pendiente' && $value['TareaResponsable']['TipoTareas'][0]['Descripcion']=="Laboral"){
+              //     $pendiente=$pendiente+1;
+              // }
+              if($value['TareaResponsable']['Estado_Tarea']=='Terminada' && $value['tarea']['estadoVencida'] =='false' && $value['TareaResponsable']['TipoTareas'][0]['Descripcion']=="Laboral"){
+                  $terminada=$terminada+1;
+              }
+              // if($value['TareaResponsable']['Estado_Tarea'] =='Vencida' && $value['TareaResponsable']['TipoTareas'][0]['Descripcion']=="Laboral"){
+              //     $vencida=$vencida+1;
+              // }
+
+          }
+          if($terminada!=0 && $totalRespo){
+           $Efectividad=round(($terminada/$totalRespo)*100);
+
+   
+            // $temp[$key]=array('Efectividad'=>$Efectividad,'Usuario'=>$tareas['Nombre']);
+            //  uksort($temp,'Efectividad');
+          
+          }else{
+            $Efectividad=0;
+          }
+ 
+          $dato[$key1]=array('Usuario'=>$tareas['Nombre'],'Efectividad'=>$Efectividad);
+          $terminada=0;
+          $totalRespo=0;
+         
+        }
+            
+
+              
+             
+
+            // if($terminada!=0 && $totalRespo!=0){
+            //   $Efectividad=round(($terminada/$totalRespo)*100,1);
+            //    $dato[$key]= array('Efectivida'=>$Efectividad,'Usuario'=>$value['usuario']['Nombre']);
+            // }else{
+            //    $dato[$key]=0;
+            // }
+
+        
+
+         // $dato['Total_Responsables']= ($totalRespo);
+         // $dato['Total_Pendiente']= ($pendiente);
+         // $dato['Total_Terminada']= ($terminada);
+         // $dato['Total_Vencida']= ($vencida);
+         // $dato['Efectividad']= ($Efectividad);
+// $dato= sort($dato,SORT_REGULAR);
+
+// function sort_by_orden ($a, $b) {
+//     return $a['Efectividad'] - $b['Efectividad'];
+// }
+// usort($dato, 'sort_by_orden');
+ // $dato = array_slice($dato, 0, 3);
+         return $dato;
+    }
+
+
 
 
 

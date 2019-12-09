@@ -48,6 +48,12 @@ class ReunionController extends Controller
         return $res;
     }
 
+    //TRAER REUNIONES PARA EL ADMINISTRADOR
+    public function ReunionAdmin($estado){
+        $respon = ReunionModel::with('Usuario','Responsables','Participantes')->where('Estado','=',$estado)->get();
+        return $respon;   
+    }
+
 
     
    

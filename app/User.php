@@ -38,6 +38,12 @@ class User extends Authenticatable
         return $this->hasMany('App\ResponsablesModel', 'Id_Usuario', 'Id_Usuario');
     }
 
+    public function ResponsablesTareas()
+    {
+        return $this->hasMany('App\ResponsablesModel', 'Id_Usuario', 'Id_Usuario')->with('TareaResponsable');
+    }
+
+
     public function Tarea()
     {
         return $this->hasMany('App\TareasModel', 'Id_Usuario', 'Id_Usuario');
