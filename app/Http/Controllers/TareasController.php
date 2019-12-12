@@ -25,57 +25,57 @@ class TareasController extends Controller
     public function index()
     {
 
-          $respon = TareasModel::with('Usuario','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('tip_tar','=','T')->get();
+          $respon = TareasModel::with('Usuario','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('tip_tar','=','T')->where('estadoEliminar','false')->get();
                return $respon;        
     }
 
     public function tareasCPM($estado,$idUsuario)
     {
 
-          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('Estado_Tarea','=',$estado)->where('Id_Usuario','=',$idUsuario)->get();
+          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('Estado_Tarea','=',$estado)->where('Id_Usuario','=',$idUsuario)->where('estadoEliminar','false')->get();
                return $respon;        
     }
 
 
     public function TareasEstado($estado,$idUsuario)
     {
-          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('tip_tar','=','T')->where('Estado_Tarea','=',$estado)->where('Id_Usuario','=',$idUsuario)->orderBy('FechaFin', 'asc')->get();
+          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('tip_tar','=','T')->where('Estado_Tarea','=',$estado)->where('Id_Usuario','=',$idUsuario)->where('estadoEliminar','false')->orderBy('FechaFin', 'asc')->get();
           return $respon;
     }
 
     public function TareasReporte($estado)
     {
-          $respon = TareasModel::where('Estado_Tarea','=',$estado)->where('Id_Tipo_Tarea','=','5')->get();
+          $respon = TareasModel::where('Estado_Tarea','=',$estado)->where('Id_Tipo_Tarea','=','5')->where('estadoEliminar','false')->get();
           return $respon;
     }
 
     public function TareasAdministrador($estado)
     {
-          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('tip_tar','=','T')->where('Estado_Tarea','=',$estado)->orderBy('FechaFin', 'asc')->get();
+          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('tip_tar','=','T')->where('Estado_Tarea','=',$estado)->orderBy('FechaFin', 'asc')->where('estadoEliminar','false')->get();
           return $respon;
     }
 
     public function TareasEstadoAdministrador($estado)
     {
-          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('Estado_Tarea','=',$estado)->get();
+          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion')->where('Estado_Tarea','=',$estado)->where('estadoEliminar','false')->get();
           return $respon;
     }
 
     public function TareasPersonales($idUsuario)
     {
-          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion')->orderBy('FechaFin', 'asc')->where('tip_tar','=','T')->where('Id_Usuario','=',$idUsuario)->where('Id_Tipo_Tarea','=','4')->get();
+          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion')->orderBy('FechaFin', 'asc')->where('tip_tar','=','T')->where('Id_Usuario','=',$idUsuario)->where('Id_Tipo_Tarea','=','4')->where('estadoEliminar','false')->get();
           return $respon;
     }
 
     public function TareasPorTipo($estado,$tipo,$idUsuario)
     {
-          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion','TipoTareas')->orderBy('FechaFin', 'asc')->where('Estado_Tarea','=',$estado)->where('Id_Tipo_Tarea','=',$tipo)->where('Id_Usuario','=',$idUsuario)->get();
+          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion','TipoTareas')->orderBy('FechaFin', 'asc')->where('Estado_Tarea','=',$estado)->where('Id_Tipo_Tarea','=',$tipo)->where('Id_Usuario','=',$idUsuario)->where('estadoEliminar','false')->get();
           return $respon;
     }
 
     public function TareasPorTipoPendiente($estado,$tipo,$idUsuario)
     {
-          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion','TipoTareas')->orderBy('FechaFin', 'asc')->where('Estado_Tarea','=',$estado)->where('Id_Tipo_Tarea','=',$tipo)->where('tip_tar','=','T')->where('Id_Usuario','=',$idUsuario)->get();
+          $respon = TareasModel::with('Usuario','TipoTareas','Responsables','Participantes','Observadores','SubTareas','Observacion','TipoTareas')->orderBy('FechaFin', 'asc')->where('Estado_Tarea','=',$estado)->where('Id_Tipo_Tarea','=',$tipo)->where('tip_tar','=','T')->where('Id_Usuario','=',$idUsuario)->where('estadoEliminar','false')->get();
           return $respon;
     }
 
@@ -104,7 +104,7 @@ class TareasController extends Controller
     //PARA SABER SI TIENE SUBTAREAS PENDIENTES
     public function TareasPendientesPorTareas($idtareas,$idUsuario)
     {
-          $respon = TareasModel::with('SubTareas')->where('Estado_Tarea','=','Pendiente')->where('tareasIdTareas','=',$idtareas)->get();
+          $respon = TareasModel::with('SubTareas')->where('Estado_Tarea','=','Pendiente')->where('tareasIdTareas','=',$idtareas)->where('estadoEliminar','false')->get();
           return $respon;
     }
 
@@ -138,13 +138,13 @@ class TareasController extends Controller
      */
     public function show($id)
     {
-          $respon = TareasModel::with('Usuario','Responsables','Participantes','Observadores','SubTareas','Observacion','Documento','TipoTareas')->where('Id_Tarea','=',$id)->get();
+          $respon = TareasModel::with('Usuario','Responsables','Participantes','Observadores','SubTareas','Observacion','Documento','TipoTareas')->where('Id_Tarea','=',$id)->where('estadoEliminar','false')->get();
                return $respon;  
     }
 
         public function Reporteshow($id)
     {
-          $respon = TareasModel::with('Usuario','Responsables','Participantes','Observadores','ReporteSubTareas','Observacion','Documento','TipoTareas')->where('Id_Tarea','=',$id)->get();
+          $respon = TareasModel::with('Usuario','Responsables','Participantes','Observadores','ReporteSubTareas','Observacion','Documento','TipoTareas')->where('Id_Tarea','=',$id)->where('estadoEliminar','false')->get();
                return $respon;  
     }
 
@@ -467,7 +467,7 @@ class TareasController extends Controller
         $Laboral=0;
         $Personal=0;
         $dato=array();
-        $res=TareasModel::with('TipoTareas')->where('Estado_Tarea','=','Pendiente')->get();
+        $res=TareasModel::with('TipoTareas')->where('Estado_Tarea','=','Pendiente')->where('estadoEliminar','false')->get();
         $resReunion=ReunionModel::where('Estado','=','Pendiente')->count();
         foreach ($res as $key => $value) {
             if($value['TipoTareas'][0]['Descripcion']=="Laboral"){
@@ -499,7 +499,7 @@ class TareasController extends Controller
         $MejoresEfectividad=array();
         $c=0;
         //$cont=ResponsablesModel::where('Id_Usuario','=','120')->count();
-        $res=TareasModel::with('TipoTareas','Responsables')->get();
+        $res=TareasModel::with('TipoTareas','Responsables')->where('estadoEliminar','false')->get();
           foreach ($res as $key => $value) {    
             //TAREAS LABORALES
             if($value['TipoTareas'][0]['Descripcion']=="Laboral"){

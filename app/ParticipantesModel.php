@@ -16,7 +16,7 @@ class ParticipantesModel extends Model
 
     public function Tarea()
     {
-        return $this->belongsTo('App\TareasModel', 'Id_Tarea', 'Id_tarea')->with('Responsables','Observadores','Usuario','Participantes','TipoTareas');
+        return $this->belongsTo('App\TareasModel', 'Id_Tarea', 'Id_tarea')->with('Responsables','Observadores','Usuario','Participantes','TipoTareas')->where('estadoEliminar','false');
     }
 
     public function Usuario()

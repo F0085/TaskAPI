@@ -16,12 +16,12 @@ class ResponsablesModel extends Model
 
     public function Tarea()
     {
-        return $this->belongsTo('App\TareasModel', 'Id_Tarea', 'Id_tarea')->with('Observadores','Participantes','Usuario','Responsables','TipoTareas');
+        return $this->belongsTo('App\TareasModel', 'Id_Tarea', 'Id_tarea')->with('Observadores','Participantes','Usuario','Responsables','TipoTareas')->where('estadoEliminar','false');
     }
     //SOLO NECESITO LOS DATOS DE LA TAREA NADA MAS
     public function TareaResponsable()
     {
-        return $this->belongsTo('App\TareasModel', 'Id_Tarea', 'Id_tarea')->with('TipoTareas');
+        return $this->belongsTo('App\TareasModel', 'Id_Tarea', 'Id_tarea')->with('TipoTareas')->where('estadoEliminar','false');
     }
 
 
